@@ -1,0 +1,76 @@
+# GitHub Actions のワークフロー定義ファイル
+# mainブランチにpushされたときに、自動でXserverへWordPressテーマをデプロイする
+#
+# V5方針：
+# - GitHub Actions側で npm ci / npm run build を実行する
+# - Viteのdistを生成してから、テーマフォルダをXserverへ転送する
+# - Xserver側では npm install / npm run build を行わない
+
+name: Deploy WordPress Theme for Xserver
+
+# mainブランチへのpushをトリガーにする
+on:
+  push:
+    branches:
+      - main
+
+# ワークフロー内で使い回す設定値
+env:
+  # 本番WordPress上のテーマフォルダ名
+  THEME_DIR: lazygenius-v5
+
+  # GitHubリポジトリ内の転送元テーマフォルダ
+  LOCAL_THEME_PATH: ./src/lazygenius-v5/
+
+  # Xserver SSH設定
+  REMOTE_USER: xs227617
+  REMOTE_HOST: sv16485.xserver.jp
+  REMOTE_PORT: 10022
+
+  # Xserver側の WordPress themes ディレクトリ
+  REMOTE_WP_THEMES_PATH: /home/xs227617/lazygenius.dev/public_html/wp-content/themes
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリのコードをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Node.js をセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: src/lazygenius-v5/package-lock.json
+
+      - name: Vite / Tailwind / TypeScript をビルド
+        working-directory: ./src/lazygenius-v5
+        run: |
+          echo "🛠 Viteビルドを開始します"
+          npm ci
+          npm run build
+          echo "✅ Viteビルドが完了しました"
+
+      - name: SSH秘密鍵の設定
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          name: id_rsa
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      - name: Xserverへテーマフォルダをrsyncで転送
+        run: |
+          echo "🔄 テーマフォルダをrsyncで転送します"
+
+          rsync -avz \
+            --exclude "node_modules/" \
+            --exclude ".git/" \
+            --exclude ".DS_Store" \
+            --exclude "*.log" \
+            -e "ssh -p ${REMOTE_PORT}" \
+            "${LOCAL_THEME_PATH}" \
+            "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_WP_THEMES_PATH}/${THEME_DIR}/"
+
+          echo "✅ デプロイが完了しました"
