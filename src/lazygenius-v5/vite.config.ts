@@ -15,6 +15,7 @@
 
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   /**
@@ -24,7 +25,7 @@ export default defineConfig({
    * - Tailwind CSS を Vite 経由で使えるようにする
    * - src/styles/main.css に書いた Tailwind の読み込みを処理してくれる
    */
-  plugins: [tailwindcss()],
+  plugins: [tailwindcss(), react()],
 
   /**
    * 開発サーバー設定
@@ -123,7 +124,10 @@ export default defineConfig({
        * src/main.ts から CSS や各種 TypeScript モジュールを読み込む。
        * WordPress側も開発時にはこのファイルを読み込む。
        */
-      input: "src/main.ts"
+      input: {
+        main: "src/main.ts",
+        reviewLab: "src/react/lazygenius-review-lab/main.tsx"
+      }
     }
   }
 });

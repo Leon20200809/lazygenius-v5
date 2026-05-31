@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 get_header();
 ?>
 
-<div class="review-lab-page">
+<div id="review-lab-root" class="review-lab-page">
     <div id="review-lessons-app"></div>
 </div>
 

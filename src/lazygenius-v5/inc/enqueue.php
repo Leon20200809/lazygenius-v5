@@ -153,17 +153,17 @@ if (!function_exists('lg_enqueue_theme_assets')) :
          * Tailwind / Vite CSS の後に読み込むことで、
          * 既存デザインを優先しやすくする。
          */
-        $theme_css_path = get_theme_file_path('assets/css/style.css');
-        $theme_css_uri  = get_theme_file_uri('assets/css/style.css');
+        // $theme_css_path = get_theme_file_path('assets/css/style.css');
+        // $theme_css_uri  = get_theme_file_uri('assets/css/style.css');
 
-        if (file_exists($theme_css_path)) {
-            wp_enqueue_style(
-                'lg-theme-style',
-                $theme_css_uri,
-                [],
-                filemtime($theme_css_path)
-            );
-        }
+        // if (file_exists($theme_css_path)) {
+        //     wp_enqueue_style(
+        //         'lg-theme-style',
+        //         $theme_css_uri,
+        //         [],
+        //         filemtime($theme_css_path)
+        //     );
+        // }
     }
 endif;
 add_action('wp_enqueue_scripts', 'lg_enqueue_theme_assets');
@@ -214,9 +214,10 @@ add_action('wp_enqueue_scripts', 'lg_enqueue_review_lessons_style');
  * 対象：
  * - 固定ページ /review-lab/
  *
- * 役割：
- * - Viteのmanifest.jsonを読み取り、ハッシュ付きCSS/JSを自動で読み込む
- * - Highlighting Code Block / Prism のCSS・JSを読み込む
+ * V5方針：
+ * - ReactブログUIもテーマ本体のViteでビルドする
+ * - dist/.vite/manifest.json から reviewLab 用のCSS/JSを取得する
+ * - /review-lab/ ページでだけ React アプリを読み込む
  *
  * @return void
  */
@@ -227,7 +228,12 @@ if (!function_exists('lg_enqueue_review_lab_assets')) :
             return;
         }
 
-        $manifest_path = get_theme_file_path('assets/review-lab/.vite/manifest.json');
+        /**
+         * V5本体Viteのmanifest
+         *
+         * npm run build によって生成される。
+         */
+        $manifest_path = get_theme_file_path('dist/.vite/manifest.json');
 
         if (!file_exists($manifest_path)) {
             return;
@@ -239,22 +245,28 @@ if (!function_exists('lg_enqueue_review_lab_assets')) :
             return;
         }
 
-        $entry = null;
+        /**
+         * review-lab専用React入口
+         *
+         * vite.config.ts の rollupOptions.input で指定した入口。
+         */
+        $entry_key = 'src/react/lazygenius-review-lab/main.tsx';
 
-        foreach ($manifest as $manifest_item) {
-            if (!empty($manifest_item['isEntry'])) {
-                $entry = $manifest_item;
-                break;
-            }
-        }
-
-        if (!$entry) {
+        if (empty($manifest[$entry_key]) || !is_array($manifest[$entry_key])) {
             return;
         }
 
+        $entry = $manifest[$entry_key];
+
+        /**
+         * review-lab用CSSを読み込む
+         *
+         * React側で import された index.css などが、
+         * manifest の css 配列に記録される。
+         */
         if (!empty($entry['css']) && is_array($entry['css'])) {
             foreach ($entry['css'] as $index => $css_file) {
-                $css_path = get_theme_file_path('assets/review-lab/' . $css_file);
+                $css_path = get_theme_file_path('dist/' . $css_file);
 
                 if (!file_exists($css_path)) {
                     continue;
@@ -262,47 +274,26 @@ if (!function_exists('lg_enqueue_review_lab_assets')) :
 
                 wp_enqueue_style(
                     'lg-review-lab-style-' . $index,
-                    get_theme_file_uri('assets/review-lab/' . $css_file),
+                    get_theme_file_uri('dist/' . $css_file),
                     [],
                     filemtime($css_path)
                 );
             }
         }
 
-        // Highlighting Code Block 用CSS
-        wp_enqueue_style(
-            'lg-review-lab-hcb-style',
-            content_url('plugins/highlighting-code-block/build/css/hcb--light.css'),
-            [],
-            '2.2.0'
-        );
-
-        // Prism本体
-        wp_enqueue_script(
-            'lg-review-lab-prism',
-            content_url('plugins/highlighting-code-block/assets/js/prism.js'),
-            [],
-            '2.2.0',
-            true
-        );
-
-        // Highlighting Code Block 用JS
-        wp_enqueue_script(
-            'lg-review-lab-hcb-script',
-            content_url('plugins/highlighting-code-block/build/js/hcb_script.js'),
-            ['lg-review-lab-prism'],
-            '2.2.0',
-            true
-        );
-
-        // ビルド済JSは最後に読み込み
+        /**
+         * review-lab用JavaScriptを読み込む
+         *
+         * React / TypeScript / TSX はビルド後、
+         * 通常のJavaScriptとして dist/assets/ に生成される。
+         */
         if (!empty($entry['file'])) {
-            $js_path = get_theme_file_path('assets/review-lab/' . $entry['file']);
+            $js_path = get_theme_file_path('dist/' . $entry['file']);
 
             if (file_exists($js_path)) {
                 wp_enqueue_script_module(
                     'lg-review-lab-app',
-                    get_theme_file_uri('assets/review-lab/' . $entry['file']),
+                    get_theme_file_uri('dist/' . $entry['file']),
                     [],
                     filemtime($js_path)
                 );

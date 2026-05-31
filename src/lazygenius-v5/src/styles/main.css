@@ -10,13 +10,63 @@
  */
 
 /**
- * Tailwind CSS の読み込み
+ * CSS Cascade Layers
  *
- * Tailwind v4 では、まず @import "tailwindcss"; で
- * Tailwind本体を読み込む。
+ * V5ではCSSの責務をレイヤーで分ける。
  *
- * これにより、PHPテンプレートに書いた
+ * theme:
+ * - Tailwind theme
+ * - tokens.css
+ *
+ * base:
+ * - LG簡易リセットCSS
+ * - HTMLタグの最小初期化
+ *
+ * components:
+ * - ボタン、カード、ヘッダーなどの再利用パーツ
+ *
+ * pages:
+ * - 固定ページや各ページ専用の見た目
+ *
+ * responsive:
+ * - 既存CSSのレスポンシブ調整
+ *
+ * utilities:
+ * - Tailwind utilities
+ *
+ * utilities を最後に置くことで、
  * max-w-6xl / mx-auto / px-6 / text-center などの
- * ユーティリティクラスが使えるようになる。
+ * Tailwindクラスが最終調整として効きやすくなる。
  */
-@import "tailwindcss";
+@layer theme, base, components, pages, responsive, utilities;
+
+/**
+ * Tailwind theme
+ *
+ * Tailwindのテーマ変数だけを読み込む。
+ * Preflightは読み込まない。
+ */
+@import "tailwindcss/theme.css" layer(theme);
+
+/**
+ * V5 theme files
+ *
+ * 自前CSSも明示的にレイヤーへ所属させる。
+ */
+@import "./tokens.css" layer(theme);
+@import "./base.css" layer(base);
+@import "./components.css" layer(components);
+@import "./pages.css" layer(pages);
+@import "./responsive.css" layer(responsive);
+
+/**
+ * Tailwind utilities
+ *
+ * Tailwind v4 の `@import "tailwindcss";` は使わない。
+ * あれは Preflight も一緒に読み込むため、
+ * WordPress本文HTMLの p / ul / ol / h2 などを過剰にリセットする。
+ *
+ * このテーマでは初期化は LG簡易リセットCSS が担当し、
+ * Tailwind はユーティリティクラスだけを使う。
+ */
+@import "tailwindcss/utilities.css" layer(utilities);

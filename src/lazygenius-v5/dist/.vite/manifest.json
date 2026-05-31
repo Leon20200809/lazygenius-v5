@@ -1,0 +1,20 @@
+{
+  "src/main.ts": {
+    "file": "assets/main-BXGB7JEm.js",
+    "name": "main",
+    "src": "src/main.ts",
+    "isEntry": true,
+    "dynamicImports": [
+      "src/react/lazygenius-review-lab/main.tsx"
+    ],
+    "css": [
+      "assets/main-xumkSiVL.css"
+    ]
+  },
+  "src/react/lazygenius-review-lab/main.tsx": {
+    "file": "assets/reviewLab-P2h06qna.js",
+    "name": "reviewLab",
+    "src": "src/react/lazygenius-review-lab/main.tsx",
+    "isEntry": true
+  }
+}

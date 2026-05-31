@@ -23,6 +23,11 @@
 import "./styles/main.css";
 import "./ts/init";
 
+const review_lessons_app = document.getElementById("review-lessons-app");
+if (review_lessons_app) {
+  import("./react/lazygenius-review-lab/main");
+}
+
 /**
  * 動作確認用ログ
  *

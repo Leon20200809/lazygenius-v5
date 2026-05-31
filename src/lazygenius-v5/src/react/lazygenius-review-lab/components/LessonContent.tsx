@@ -1,0 +1,102 @@
+import { useEffect } from "react";
+import type { ReviewLesson } from "../types/lesson";
+
+declare global {
+  interface Window {
+    Prism?: {
+      highlightAll: () => void;
+    };
+  }
+}
+
+type LessonContentProps = {
+  selectedLesson: ReviewLesson | null;
+};
+
+export default function LessonContent({ selectedLesson }: LessonContentProps) {
+  const contentClassName = [
+    "max-w-none min-w-0 overflow-hidden leading-8 text-slate-200",
+
+    // links
+    "[&_a]:break-words [&_a]:text-amber-300 [&_a]:underline [&_a]:underline-offset-4",
+
+    // headings
+    "[&_h2]:mt-12 [&_h2]:mb-5 [&_h2]:break-words [&_h2]:border-b [&_h2]:border-slate-800 [&_h2]:pb-3 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:leading-relaxed [&_h2]:text-slate-50",
+    "[&_h3]:mt-10 [&_h3]:mb-4 [&_h3]:break-words [&_h3]:text-xl [&_h3]:font-bold [&_h3]:leading-relaxed [&_h3]:text-slate-100",
+
+    // text
+    "[&_p]:mb-5 [&_p]:break-words [&_p]:leading-8",
+    "[&_strong]:font-bold [&_strong]:text-slate-50",
+
+    // lists
+    "[&_ul]:mb-5 [&_ul]:list-disc [&_ul]:pl-6",
+    "[&_ol]:mb-5 [&_ol]:list-decimal [&_ol]:pl-6",
+    "[&_li]:mb-2 [&_li]:break-words [&_li]:leading-8",
+    "[&_li>ul]:mt-2 [&_li>ol]:mt-2",
+
+    // separators
+    "[&_hr]:my-8 [&_hr]:border-slate-800",
+
+    // media
+    "[&_figure]:my-8",
+    "[&_img]:h-auto [&_img]:max-w-full [&_img]:rounded-xl",
+    "[&_figcaption]:mt-3 [&_figcaption]:text-sm [&_figcaption]:text-slate-400",
+
+    // code
+    "[&_pre]:my-6 [&_pre]:max-w-full [&_pre]:overflow-x-auto [&_pre]:rounded-xl [&_pre]:bg-slate-950 [&_pre]:p-4 [&_pre]:text-sm",
+    "[&_pre_code]:max-w-full [&_pre_code]:break-words",
+    "[&_:not(pre)>code]:rounded [&_:not(pre)>code]:bg-slate-950 [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_:not(pre)>code]:text-amber-200",
+
+    // table
+    "[&_.wp-block-table]:my-6 [&_.wp-block-table]:max-w-full [&_.wp-block-table]:overflow-x-auto",
+    "[&_table]:block [&_table]:max-w-full [&_table]:overflow-x-auto",
+    "[&_td]:border [&_td]:border-slate-700 [&_td]:p-3",
+    "[&_th]:border [&_th]:border-slate-700 [&_th]:bg-slate-800 [&_th]:p-3"
+  ].join(" ");
+
+  useEffect(() => {
+    if (!selectedLesson) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      window.Prism?.highlightAll();
+    });
+  }, [selectedLesson?.id]);
+
+  if (!selectedLesson) {
+    return (
+      <section className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 sm:p-6">
+        <p className="text-slate-400">記事が選択されていません。</p>
+      </section>
+    );
+  }
+
+  return (
+    <article className="w-full min-w-0 overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/80 p-5 sm:p-6">
+      <header className="mb-6 border-b border-slate-800 pb-5">
+        <p className="mb-3 text-xs font-bold tracking-[0.25em] text-amber-400 uppercase">
+          Selected Lesson
+        </p>
+
+        <h2 className="text-xl font-bold leading-relaxed text-slate-50 sm:text-2xl">
+          {selectedLesson.title}
+        </h2>
+
+        <a
+          href={selectedLesson.link}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-4 inline-flex text-sm font-bold text-amber-300 underline-offset-4 hover:text-amber-200 hover:underline"
+        >
+          通常の記事ページで開く
+        </a>
+      </header>
+
+      <div
+        className={contentClassName}
+        dangerouslySetInnerHTML={{ __html: selectedLesson.contentHtml }}
+      />
+    </article>
+  );
+}
