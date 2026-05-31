@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+
+# Node / Vite
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# WordPress / local temp
+wp-config-local.php
+
+# Build output
+# 本番デプロイで dist/ をGit管理する場合は、下の行はコメントアウトする
+# dist/
+
+# OS / misc
+Thumbs.db

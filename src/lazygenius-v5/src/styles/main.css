@@ -1,0 +1,22 @@
+/**
+ * V5 メインCSS
+ *
+ * このファイルは、Vite経由で読み込まれるCSSの入口。
+ * src/main.ts から import される。
+ *
+ * WordPressの style.css から直接読むのではなく、
+ * Vite がこのCSSを処理し、開発時は dev server から、
+ * 本番時は dist/ にビルドされたCSSとして読み込む。
+ */
+
+/**
+ * Tailwind CSS の読み込み
+ *
+ * Tailwind v4 では、まず @import "tailwindcss"; で
+ * Tailwind本体を読み込む。
+ *
+ * これにより、PHPテンプレートに書いた
+ * max-w-6xl / mx-auto / px-6 / text-center などの
+ * ユーティリティクラスが使えるようになる。
+ */
+@import "tailwindcss";

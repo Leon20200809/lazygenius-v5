@@ -1,0 +1,127 @@
+/* -------------------------------------------------------
+    utilities.css — LazyGenius専用の小技群
+    目的:
+    - テーマ内で必要な最小限の調整クラスを用意する
+    - Tailwind CSS の hidden / block / flex / mb-* などと衝突しないよう、
+        LG専用クラスには .lg-u- 接頭辞を付ける
+
+    注意:
+    - Tailwind導入領域と共存するため、汎用名の .hidden / .block / .flex などは使わない
+    - 必要になったものだけ追加する
+-------------------------------------------------------- */
+
+@layer utilities {
+
+    /* -------------------------------------------------------
+        余白
+    -------------------------------------------------------- */
+
+    .lg-u-m-0 {
+        margin: 0 !important;
+    }
+
+    .lg-u-mb-0 {
+        margin-bottom: 0 !important;
+    }
+
+    .lg-u-mb-1 {
+        margin-bottom: var(--space-1) !important;
+    }
+
+    .lg-u-mb-2 {
+        margin-bottom: var(--space-2) !important;
+    }
+
+    .lg-u-mb-3 {
+        margin-bottom: var(--space-3) !important;
+    }
+
+    .lg-u-mb-4 {
+        margin-bottom: var(--space-4) !important;
+    }
+
+    .lg-u-p-1 {
+        padding: var(--space-1) !important;
+    }
+
+    .lg-u-p-2 {
+        padding: var(--space-2) !important;
+    }
+
+    /* -------------------------------------------------------
+        表示
+    -------------------------------------------------------- */
+
+    .lg-u-hidden {
+        display: none !important;
+    }
+
+    .lg-u-block {
+        display: block !important;
+    }
+
+    .lg-u-inline {
+        display: inline !important;
+    }
+
+    .lg-u-inline-block {
+        display: inline-block !important;
+    }
+
+    /* -------------------------------------------------------
+        Flex
+    -------------------------------------------------------- */
+
+    .lg-u-flex {
+        display: flex !important;
+    }
+
+    .lg-u-items-center {
+        align-items: center !important;
+    }
+
+    .lg-u-justify-between {
+        justify-content: space-between !important;
+    }
+
+    .lg-u-justify-center {
+        justify-content: center !important;
+    }
+
+    .lg-u-gap-1 {
+        gap: var(--space-1) !important;
+    }
+
+    .lg-u-gap-2 {
+        gap: var(--space-2) !important;
+    }
+
+    /* -------------------------------------------------------
+        テキスト
+    -------------------------------------------------------- */
+
+    .lg-u-text-center {
+        text-align: center !important;
+    }
+
+    .lg-u-text-right {
+        text-align: right !important;
+    }
+
+    /* -------------------------------------------------------
+        アクセシビリティ
+        視覚的には隠すが、スクリーンリーダーには読ませる
+    -------------------------------------------------------- */
+
+    .lg-u-sr-only {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+    }
+}
