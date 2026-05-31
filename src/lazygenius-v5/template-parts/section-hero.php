@@ -1,4 +1,7 @@
-<section class="hero">
+<section class="hero" style="
+    --hero-bg-image: url('<?php echo esc_url(lg_get_img_uri('/hero-bg-image.webp')); ?>');
+    --hero-bg-image-sp: url('<?php echo esc_url(lg_get_img_uri('/hero-bg-image-sp.webp')); ?>');
+">
     <div class="hero-content">
         <p class="hero-subtitle">WordPress / PHP / React / Laravel / Next.js</p>
 
