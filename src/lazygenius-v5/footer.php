@@ -1,6 +1,6 @@
 <!-- footer.php -->
 <footer class="site-footer">
-    <div class="container">
+    <div class="lg-container">
         <p class="footer-copy">
             <span>&copy; <?= date('Y'); ?> LazyGenius™. All rights reserved.</span><br>
             <em>Automate through laziness. Accelerate through impatience. Safeguard quality through pride.</em><br>

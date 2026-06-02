@@ -72,7 +72,7 @@ $works_items = [
 ?>
 
 <section class="works" id="works">
-    <div class="container">
+    <div class="lg-container">
         <h2 class="section-title">Works</h2>
 
         <p class="works__lead">

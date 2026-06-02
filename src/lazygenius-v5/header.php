@@ -16,7 +16,7 @@
     <?php wp_body_open(); ?>
 
     <header class="site-header">
-        <div class="site-header__inner container">
+        <div class="site-header__inner lg-container">
 
             <a class="site-header__logo" href="<?= esc_url(home_url('/')); ?>" aria-label="<?php bloginfo('name'); ?> ホームへ">
                 <img

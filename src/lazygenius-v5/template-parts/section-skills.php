@@ -1,6 +1,6 @@
 <!-- section-skills.php -->
 <section class="skills" id="skills">
-    <div class="container">
+    <div class="lg-container">
         <h2 class="section-title">Skills</h2>
 
         <div class="skills__grid">

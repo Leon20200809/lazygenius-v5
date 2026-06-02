@@ -1,6 +1,6 @@
 <!-- section-contact.php -->
 <section id="contact" class="contact-section">
-    <div class="container">
+    <div class="lg-container">
         <h2 class="section-title">Contact</h2>
 
         <!-- 入力ブロック -->

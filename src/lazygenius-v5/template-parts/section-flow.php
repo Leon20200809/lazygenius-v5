@@ -1,6 +1,6 @@
 <!-- section-flow.php -->
 <section class="flow" id="flow">
-    <div class="container">
+    <div class="lg-container">
         <h2 class="section-title">Flow</h2>
 
         <p class="flow__lead">

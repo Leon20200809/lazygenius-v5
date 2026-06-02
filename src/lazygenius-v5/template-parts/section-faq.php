@@ -1,6 +1,6 @@
 <!-- section-faq.php -->
 <section class="faq" id="faq">
-  <div class="container">
+  <div class="lg-container">
     <h2 class="section-title">FAQ</h2>
 
     <p class="faq__lead">

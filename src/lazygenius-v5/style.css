@@ -5,5 +5,3 @@ Author URI: https://lazygenius.dev/
 Description: 通常のWordPressクラシックテーマとして納品できる構成を保ちながら、Vite / Tailwind / TypeScript によってCSS・JavaScriptを管理し、必要に応じてReactを部分導入できる拡張性を備えたテーマ。
 Version: 5.0.0
 */
-
-@import url("./assets/css/style.css");

@@ -1,6 +1,6 @@
 <!-- section-about.php -->
 <section class="about" id="about">
-    <div class="container">
+    <div class="lg-container">
         <h2 class="section-title">About</h2>
 
         <div class="about__body">
