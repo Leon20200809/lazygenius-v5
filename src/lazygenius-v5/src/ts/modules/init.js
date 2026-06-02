@@ -224,3 +224,9 @@ const LG = {
     this.components.scrollReveal = null;
   }
 };
+
+window.LG = LG;
+
+document.addEventListener("DOMContentLoaded", () => {
+  LG.initAll(document);
+});
