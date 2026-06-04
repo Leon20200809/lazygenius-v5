@@ -10,7 +10,7 @@
 
 Reactはテーマ全体に最初から導入するのではなく、必要なUIだけに部分導入できる拡張要素として扱います。
 
-[![Deploy to Xserver](https://github.com/Leon20200809/lazygenius-v5/actions/workflows/deploy.yml/badge.svg)](https://github.com/Leon20200809/lazygenius-v5/actions)
+[![Deploy WordPress Theme for Xserver](https://github.com/Leon20200809/lazygenius-v5/actions/workflows/Deploy%20WordPress%20Theme%20for%20Xserver/badge.svg)](https://github.com/Leon20200809/lazygenius-v5/actions)
 
 ![メイン画面のスクリーンショット](./screenshots/screenshot.png)
 
