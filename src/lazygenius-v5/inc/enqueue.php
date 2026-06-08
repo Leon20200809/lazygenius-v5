@@ -180,7 +180,7 @@ if (!function_exists('lg_enqueue_review_lessons_style')) :
         wp_enqueue_style(
             'lg-review-lessons-style',
             $css_uri,
-            ['lg-v4-style'],
+            [],
             filemtime($css_path)
         );
     }
