@@ -77,6 +77,24 @@ $works_items = [
         'category' => 'react',
         'url' => $git_hub_url,
     ],
+    [
+        'title' => 'LazyGenius Quiz API',
+        'text' => 'Web開発用語クイズの問題取得・正解判定を担当するLaravel製APIです。',
+        'tech' => 'Laravel / PHP / MySQL / PHPUnit / GitHub Actions / Xserver',
+        'point' => 'Next.jsフロントから利用するAPIとして設計。問題データをMySQLで管理し、10問取得・選択肢生成・回答の一括採点をLaravel側で担当。正解情報をフロントへ渡さず、サーバー側で判定する構成にすることで、責務分離と秘匿情報管理を意識して制作。',
+        'image' => 'works-sample.webp',
+        'category' => 'laravel',
+        'url' => $git_hub_url . "/lazygenius-quiz-api",
+    ],
+    [
+        'title' => 'LazyGenius Quiz Frontend',
+        'text' => 'Laravel APIと連携してWeb開発用語クイズを表示するNext.js製フロントエンドです。',
+        'tech' => 'Next.js / React / TypeScript / Tailwind CSS / BFF / Vercel',
+        'point' => 'Next.jsのRoute HandlerをBFF層として利用し、ブラウザからLaravel APIを直接呼ばない構成を採用。10問分の問題取得、回答状態の管理、採点結果の表示を担当し、Laravel APIとの通信責務を画面コンポーネントから分離することを意識して制作。',
+        'image' => 'works-sample.webp',
+        'category' => 'react',
+        'url' => $git_hub_url . "/lazygenius-quiz-front",
+    ],
 ];
 ?>
 
