@@ -3,7 +3,7 @@
 
 /**
  * ------------------------------------------------------------
- * LazyGeniusDev_WordPressThemeV4 : Enqueue
+ * LazyGeniusDev_WordPressThemeV5 : Enqueue
  * ------------------------------------------------------------
  * 目的：
  *   - テーマ共通のCSS / JS / Fontを読み込む
