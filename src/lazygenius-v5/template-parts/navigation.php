@@ -5,7 +5,7 @@
 function lg_get_nav_items()
 {
     return [
-        ['label' => 'Home', 'id' => ''],
+        ['label' => 'Home', 'id' => 'top'],
         ['label' => 'About', 'id' => 'about'],
         ['label' => 'Skills', 'id' => 'skills'],
         ['label' => 'Works', 'id' => 'works'],
