@@ -137,13 +137,70 @@
     /* ========================================
   セクション works
   ======================================== */
+    .works__selected {
+      gap: var(--space-xl);
+    }
+
+    .works__case,
+    .works__case:first-child {
+      padding: var(--space-l) 0;
+      background: transparent;
+    }
+
+    .works__case-header {
+      grid-template-columns: 3rem minmax(0, 1fr);
+      gap: var(--space-s);
+      margin-bottom: var(--space-l);
+    }
+
+    .works__case-status {
+      grid-column: 2;
+      width: fit-content;
+    }
+
+    .works__case-content {
+      grid-template-columns: 1fr;
+      gap: var(--space-l);
+      padding-inline-start: 0;
+    }
+
+    .works__case-evidence {
+      padding: var(--space-m);
+    }
+
+    .works__tabs {
+      margin-top: var(--space-xl);
+    }
+
     .works__tab-list {
-      grid-auto-columns: initial;
+      grid-auto-columns: max-content;
+      max-width: 100%;
+      overflow-x: auto;
     }
 
     .works__grid {
       display: grid;
       grid-template-columns: 1fr;
+    }
+
+    .works__body {
+      grid-template-areas:
+        "problem"
+        "approach"
+        "evidence";
+      grid-template-columns: 1fr;
+      gap: var(--space-m);
+    }
+
+    .works__card {
+      padding-block: var(--space-l);
+    }
+
+    .works__archive-evidence {
+      padding-block-start: var(--space-m);
+      padding-inline-start: 0;
+      border-block-start: 1px solid var(--color-border);
+      border-inline-start: 0;
     }
 
     .works__support {

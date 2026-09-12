@@ -1,6 +1,6 @@
 {
   "src/main.ts": {
-    "file": "assets/main-8EwfBo01.js",
+    "file": "assets/main-CwifrGVT.js",
     "name": "main",
     "src": "src/main.ts",
     "isEntry": true,
@@ -8,7 +8,7 @@
       "src/react/lazygenius-review-lab/main.tsx"
     ],
     "css": [
-      "assets/main-CnglOXbG.css"
+      "assets/main-B-kbIgRx.css"
     ]
   },
   "src/react/lazygenius-review-lab/main.tsx": {

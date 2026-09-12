@@ -23,6 +23,8 @@
     --color-accent: #bf9142;
     /* ホバー（金を少し明るく） */
     --color-accent-hover: #d4a657;
+    /* 第二アクセント（証拠・注目を示す紅赤） */
+    --color-accent-evidence: #d93a49;
     /* 補足文字（彩度を落としたベージュ） */
     --color-muted: #a89a8f;
     /* 境界線（背景に馴染ませる） */

@@ -1,96 +1,148 @@
 <?php
 $git_hub_url = 'https://github.com/Leon20200809';
 
+// Servicesで示した能力を実コードで確認できる代表実績を定義する
+$selected_works = [
+    [
+        'number' => '01',
+        'title' => 'LazyGeniusDev WordPress Theme V4',
+        'problem' => 'サイトを直すたびに、公開までの手順が増えていく。',
+        'approach' => '画面、問い合わせ、記事管理を一つのテーマへまとめました。修正から公開までを、同じ流れで扱えるようにしています。',
+        'product' => '画面、問い合わせ、記事管理、公開方法をまとめたWordPressテーマ。',
+        'change' => '記事は管理画面から追加できます。サイトの修正はGitHubへ反映するとサーバーへ届けられるため、制作後の更新や公開までまとめて扱えます。',
+        'scope' => '画面設計 / WordPressテーマ / 問い合わせ / 管理画面 / 公開方法',
+        'tech' => 'WordPress / PHP / JavaScript / GitHub Actions',
+        'service' => 'Webサイトを作る・直す / 公開まで',
+        'status' => 'GitHub / 公開運用',
+        'url' => $git_hub_url . '/LazyGeniusDev_WordPressThemeV4',
+    ],
+    [
+        'number' => '02',
+        'title' => 'LG Mercari Duplicate Checker',
+        'problem' => '商品を調べるたびに、スプレッドシートを開くのが面倒。',
+        'approach' => '検索画面の商品と登録済みの一覧を自動で照らし合わせ、その場で重複が分かるようにしました。',
+        'product' => '検索画面で登録済み商品を示すChrome拡張。',
+        'change' => 'スプレッドシートを別画面で探さなくても、検索結果を見たまま重複を判断できます。あとから表示された商品も確認の対象になります。',
+        'scope' => '拡張機能 / 商品情報の読み取り / スプレッドシート連携 / 重複表示',
+        'tech' => 'Chrome Extension / JavaScript / Google Sheets API',
+        'service' => '手作業を仕組みに変える',
+        'status' => 'GitHub / MVP',
+        'url' => $git_hub_url . '/lg-mercari-duplicate-checker',
+    ],
+    [
+        'number' => '03',
+        'title' => 'Astro × Cloudflare LP',
+        'problem' => '軽いLPにしたい。でも問い合わせ処理は、ページと分けて扱いたい。',
+        'approach' => '案内ページは小さく作り、入力確認とメール送信だけを別の処理へ分けました。',
+        'product' => 'サービス案内LPと、問い合わせをメールへ届ける仕組み。',
+        'change' => '表示するページは小さく保ち、問い合わせだけを別の処理として動かします。入力内容と自動送信を確認してからメールへ進む流れも用意しています。',
+        'scope' => '画面 / 問い合わせ / 入力確認 / メール送信 / 公開方法',
+        'tech' => 'Astro / TypeScript / Cloudflare Workers / Turnstile / Resend',
+        'service' => 'Webサイトを作る・直す / 公開まで',
+        'status' => 'GitHub / Learning Lab',
+        'url' => $git_hub_url . '/lg-astro-cloudflare-lp',
+    ],
+];
+
 $works_tabs = [
     'wordpress' => [
-        'label' => 'WordPress',
+        'label' => 'Webサイト・WordPress',
     ],
     'laravel' => [
-        'label' => 'PHP / Laravel',
+        'label' => '業務ツール・API',
     ],
     'react' => [
-        'label' => 'React / JavaScript',
+        'label' => 'Webアプリ・UI',
     ],
 ];
 
 $works_items = [
     [
         'title' => 'LazyGenius V5 WordPress Theme',
-        'text' => '通常のWordPressクラシックテーマとして扱える構成を保ちながら、Vite / Tailwind CSS / TypeScript を導入したオリジナルテーマです。',
+        'problem' => 'WordPressテーマはそのまま納品したい。でもCSSやJavaScriptはまとめて管理したい。',
+        'approach' => 'WordPressの仕組みを残し、開発用のファイルだけをビルドする形に分けた。',
+        'link_label' => 'GitHubで実装を見る',
         'tech' => 'WordPress / PHP / Vite / Tailwind CSS / TypeScript / JavaScript / GitHub Actions / Xserver',
-        'point' => 'WordPressテーマとしての納品しやすさを維持しつつ、CSS・JavaScriptをViteで管理。Tailwind CSSによる高速なレイアウト調整、UI部品のモジュール管理、GitHub Actionsによる自動デプロイまで含め、保守性と開発効率を両立する構成を意識して制作。',
         'image' => 'works-sample.webp',
         'category' => 'wordpress',
         'url' => $git_hub_url . "/lazygenius-v5",
     ],
     [
         'title' => 'LG Job Hunter',
-        'text' => '求人情報の収集・保存・管理を効率化するために制作している、自分用のWordPressプラグインです。',
+        'problem' => '求人ページを一件ずつ開き、候補を手で残していくのが面倒。',
+        'approach' => '求人の取得、重複確認、保存、管理画面での確認までをWordPressへまとめた。',
+        'link_label' => 'GitHubで実装を見る',
         'tech' => 'WordPress / PHP / Custom Post Type / Meta Box / HTML Parser / Cron設計',
-        'point' => 'ハローワーク求人情報を取得し、カスタム投稿として保存・管理できる構成を検証。求人収集を手作業で行うのではなく、後から比較・判断しやすい形で蓄積することを目的に、CPT、メタ情報、取得処理、保存処理の責務を分けて設計。',
         'image' => 'works-sample.webp',
         'category' => 'wordpress',
         'url' => $git_hub_url . "/lg-job-hunter",
     ],
     [
         'title' => 'WordPress × Next.js ヘッドレスCMS表示デモ',
-        'text' => 'WordPressをヘッドレスCMSとして利用し、REST APIから取得した投稿データをNext.jsで表示するMVPデモです。',
+        'problem' => 'WordPressの記事管理は残し、表示する画面だけを別の作り方にできるか試したい。',
+        'approach' => 'WordPressから公開済み記事を読み、別のWeb画面へ表示するMVPで確認した。',
+        'link_label' => '公開画面を見る',
         'tech' => 'WordPress / REST API / Next.js / TypeScript / Tailwind CSS / Vercel',
-        'point' => '既存のWordPress運用を活かしながら、表示部分をNext.js / Vercelに分離する構成を検証。WordPress REST APIで取得したHTML本文をNext.jsで描画し、Tailwind CSSの任意セレクタで記事本文を装飾。Vercelデプロイ時には、海外ビルド環境からのREST APIアクセス制限にも対応。',
         'image' => 'works-sample.webp',
         'category' => 'wordpress',
         'url' => "https://wp-headless-demo-peach.vercel.app/",
     ],
     [
         'title' => 'Laravel 組織図表示アプリ',
-        'text' => 'ログイン認証機能を備え、誰が誰の部下かを視覚的に表示する業務データ管理アプリです。',
+        'problem' => '親子関係のある会員情報は、行が並ぶ一覧だけではつながりを追いにくい。',
+        'approach' => 'CSVから会員情報を取り込み、ログインした人を起点に組織のつながりを表示した。',
+        'link_label' => 'GitHubで実装を見る',
         'tech' => 'Laravel / PHP / Blade / Tailwind CSS / MySQL',
-        'point' => 'CSVインポート、ログイン認証、階層データの表示など、業務データを扱う実用性を意識して制作。単なる画面表示ではなく、ログインユーザーごとに閲覧範囲を変える構成を想定し、業務改善アプリとして育てられる土台を重視。',
         'image' => 'works-sample.webp',
         'category' => 'laravel',
-        'url' => $git_hub_url,
+        'url' => $git_hub_url . "/binary-tree-tool",
     ],
     [
         'title' => 'Laravel テストコード練習道場',
-        'text' => 'Laravelのテストコードを基礎から練習し、機能の動作確認を自動化するための学習用プロジェクトです。',
+        'problem' => '学習テーマ：フォーム送信後の移動やメッセージを、手作業だけで確認しない。',
+        'approach' => '送信、セッション、リダイレクト、表示までをテストコードで順番に確かめた。',
+        'link_label' => 'GitHubで学習内容を見る',
         'tech' => 'Laravel / PHP / PHPUnit / Blade',
-        'point' => '手動確認に頼らず、テストコードで仕様を確認できる状態を目指して制作。フォーム送信、リダイレクト、セッション、バリデーション、DB保存など、実務で壊れやすい処理をテストで守る考え方を段階的に学習。',
         'image' => 'works-sample.webp',
         'category' => 'laravel',
-        'url' => $git_hub_url,
+        'url' => $git_hub_url . "/laravel-test-dojo",
     ],
     [
         'title' => 'Next.js レジュメ管理アプリ',
-        'text' => 'Google SheetsのCSVデータをもとに、Web履歴書と印刷用ページを表示する就職活動支援アプリです。',
+        'problem' => '経歴を直すたびに、Web表示と印刷用書類を別々に更新したくない。',
+        'approach' => '経歴はスプレッドシートで管理し、Web表示、印刷、選考結果の返信へ使い回せるようにした。',
+        'link_label' => 'GitHubで実装を見る',
         'tech' => 'Next.js / React / TypeScript / Tailwind CSS / Google Sheets / Vercel',
-        'point' => '職務経歴やスキル情報をGoogle Sheetsで一元管理し、Web表示と印刷用ページに再利用できる構成を意識して制作。採用担当者がWeb上で情報を確認しやすく、応募者側も更新・提出の手間を減らせる仕組みとして設計。',
         'image' => 'works-sample.webp',
         'category' => 'react',
         'url' => $git_hub_url . "/lazygenius-web-resume",
     ],
     [
         'title' => 'LG UI KIT',
-        'text' => 'ハンバーガーメニュー、アコーディオン、タブ切り替えなど、Web制作でよく使うUI部品をまとめたJavaScript UIキットです。',
+        'problem' => '学習テーマ：サイトを作るたびに、メニューやタブを最初から組み直さない。',
+        'approach' => 'よく使うUIを、HTMLの属性から初期化できる部品としてまとめた。',
+        'link_label' => 'GitHubでUI部品を見る',
         'tech' => 'HTML / CSS / JavaScript / ARIA / data属性',
-        'point' => 'data属性やaria属性を使い、HTML・CSS・JavaScriptの責務を分けながら、自作WordPressテーマ内でも再利用できるUI部品として整理。後からTypeScript化やVite管理へ移行しやすいよう、部品ごとの責務分離を意識。',
         'image' => 'works-sample.webp',
         'category' => 'react',
-        'url' => $git_hub_url,
+        'url' => $git_hub_url . "/LG_UI_KIT",
     ],
     [
         'title' => 'LazyGenius Quiz API',
-        'text' => 'Web開発用語クイズの問題取得・正解判定を担当するLaravel製APIです。',
+        'problem' => '回答する前に正解が見えたり、不正な回答をそのまま受け付けたりしないようにしたい。',
+        'approach' => '出題時は正解を渡さず、10問分の回答をサーバー側でまとめて確認する形にした。',
+        'link_label' => 'GitHubでAPIを見る',
         'tech' => 'Laravel / PHP / MySQL / PHPUnit / GitHub Actions / Xserver',
-        'point' => 'Next.jsフロントから利用するAPIとして設計。問題データをMySQLで管理し、10問取得・選択肢生成・回答の一括採点をLaravel側で担当。正解情報をフロントへ渡さず、サーバー側で判定する構成にすることで、責務分離と秘匿情報管理を意識して制作。',
         'image' => 'works-sample.webp',
         'category' => 'laravel',
         'url' => $git_hub_url . "/lazygenius-quiz-api",
     ],
     [
         'title' => 'LazyGenius Quiz Frontend',
-        'text' => 'Laravel APIと連携してWeb開発用語クイズを表示するNext.js製フロントエンドです。',
+        'problem' => '10問の進み具合と回答を保ちながら、最後の送信を二重に行わない画面を試したい。',
+        'approach' => '問題、回答、結果の状態を分け、10問目だけ回答をまとめて送る流れにした。',
+        'link_label' => 'GitHubで画面実装を見る',
         'tech' => 'Next.js / React / TypeScript / Tailwind CSS / BFF / Vercel',
-        'point' => 'Next.jsのRoute HandlerをBFF層として利用し、ブラウザからLaravel APIを直接呼ばない構成を採用。10問分の問題取得、回答状態の管理、採点結果の表示を担当し、Laravel APIとの通信責務を画面コンポーネントから分離することを意識して制作。',
         'image' => 'works-sample.webp',
         'category' => 'react',
         'url' => $git_hub_url . "/lazygenius-quiz-front",
@@ -100,14 +152,73 @@ $works_items = [
 
 <section class="works" id="works">
     <div class="lg-container">
-        <h2 class="section-title">Works</h2>
+        <div class="works__heading">
+            <p class="works__eyebrow">Evidence</p>
+            <h2 class="section-title works__title">Works</h2>
+            <p class="works__lead">
+                困りごとに対して何を作り、作業がどう変わるのかをまとめています。
+                詳しい実装は、それぞれのGitHubから確認できます。
+            </p>
+        </div>
 
-        <p class="works__lead">
-            これまでに制作したWebサイトやアプリの一部を掲載しています。
-        </p>
+        <!-- 代表実績を主張と一次証拠が対応する順序で提示する -->
+        <div class="works__selected" aria-label="代表実績">
+            <?php foreach ($selected_works as $selected_work) : ?>
+                <article class="works__case">
+                    <header class="works__case-header">
+                        <p class="works__case-number" aria-hidden="true"><?= esc_html($selected_work['number']); ?></p>
+                        <div class="works__case-heading">
+                            <p class="works__case-service"><?= esc_html($selected_work['service']); ?></p>
+                            <h3 class="works__case-title"><?= esc_html($selected_work['problem']); ?></h3>
+                        </div>
+                        <p class="works__case-status"><?= esc_html($selected_work['status']); ?></p>
+                    </header>
 
-        <!-- タブパネル -->
+                    <div class="works__case-content">
+                        <div class="works__case-narrative">
+                            <div class="works__case-block">
+                                <p class="works__case-label">こう工夫した</p>
+                                <p class="works__case-purpose"><?= esc_html($selected_work['approach']); ?></p>
+                            </div>
+                            <div class="works__case-block works__case-block--outcome">
+                                <p class="works__case-label">こう変わる</p>
+                                <p><?= esc_html($selected_work['change']); ?></p>
+                            </div>
+                        </div>
+
+                        <aside class="works__case-evidence" aria-label="実装の証拠">
+                            <p class="works__case-label">できたもの / 証拠</p>
+                            <h4 class="works__case-repository"><?= esc_html($selected_work['title']); ?></h4>
+                            <p class="works__case-product"><?= esc_html($selected_work['product']); ?></p>
+
+                            <dl class="works__case-evidence-details">
+                                <div>
+                                    <dt>担当したこと</dt>
+                                    <dd><?= esc_html($selected_work['scope']); ?></dd>
+                                </div>
+                                <div>
+                                    <dt>使用技術</dt>
+                                    <dd><?= esc_html($selected_work['tech']); ?></dd>
+                                </div>
+                            </dl>
+
+                            <a
+                                class="works__evidence-link"
+                                href="<?= esc_url($selected_work['url']); ?>"
+                                aria-label="<?= esc_attr($selected_work['title'] . 'の実コードをGitHubで確認'); ?>"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                GitHubで実装を見る
+                            </a>
+                        </aside>
+                    </div>
+                </article>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- 既存実績をカテゴリ別のコンパクトな一覧として維持する -->
         <div class="works__tabs" data-lg-tabs>
+            <h3 class="works__archive-title">Other Works</h3>
             <!-- タブリスト生成 -->
             <div role="tablist" aria-label="制作実績カテゴリ" class="works__tab-list">
                 <?php $is_first_tab = true; ?>
@@ -142,39 +253,29 @@ $works_items = [
                             <?php if ($work_item['category'] !== $category_key) continue; ?>
 
                             <article class="works__card">
-                                <a
-                                    href="<?= esc_url($work_item['url']); ?>"
-                                    class="works__link"
-                                    target="_blank"
-                                    rel="noopener noreferrer">
-
-                                    <div class="works__image">
-                                        <img
-                                            src="<?= esc_url(lg_get_img_uri('/' . $work_item['image'])); ?>"
-                                            alt="<?= esc_attr($work_item['title']); ?>">
-                                    </div>
-                                </a>
-
                                 <div class="works__body">
-                                    <h3 class="works__name">
-                                        <?= esc_html($work_item['title']); ?>
-                                    </h3>
+                                    <h4 class="works__problem">
+                                        <?= esc_html($work_item['problem']); ?>
+                                    </h4>
 
-                                    <p class="works__text">
-                                        <?= esc_html($work_item['text']); ?>
+                                    <p class="works__approach">
+                                        <span aria-hidden="true">→</span>
+                                        <?= esc_html($work_item['approach']); ?>
                                     </p>
 
-                                    <dl class="works__meta">
-                                        <div class="works__meta-item">
-                                            <dt>使用技術</dt>
-                                            <dd><?= esc_html($work_item['tech']); ?></dd>
-                                        </div>
+                                    <div class="works__archive-evidence">
+                                        <p class="works__repository"><?= esc_html($work_item['title']); ?></p>
+                                        <p class="works__archive-tech"><?= esc_html($work_item['tech']); ?></p>
 
-                                        <div class="works__meta-item">
-                                            <dt>意識したこと</dt>
-                                            <dd><?= esc_html($work_item['point']); ?></dd>
-                                        </div>
-                                    </dl>
+                                        <a
+                                            href="<?= esc_url($work_item['url']); ?>"
+                                            class="works__archive-link"
+                                            aria-label="<?= esc_attr($work_item['title'] . 'の実績リンクを開く'); ?>"
+                                            target="_blank"
+                                            rel="noopener noreferrer">
+                                            <?= esc_html($work_item['link_label']); ?>
+                                        </a>
+                                    </div>
                                 </div>
                             </article>
                         <?php endforeach; ?>

@@ -2,448 +2,594 @@
 
 ## 任務名
 
-Skillsを「任せられる仕事」が伝わるServicesへ再編集する
+Worksの可読性調整 — 縦積み・余白・文字階層を整える
 
 ## GOAL
 
-現用 LazyGenius.dev のSkillsセクションを、
-技術分類の一覧ではなく、
+現用 LazyGenius.dev のWorksセクションについて、
+すでに確立したProblem Firstの情報設計を維持したまま、
 
-- 何を相談できるか
-- どんな仕事を任せられるか
-- どんな状態まで持っていけるか
+- Selected Worksの読み順
+- Other Worksの余白
+- Other Worksの文字サイズ
+- Selected WorksとOther Worksの視覚的な連続性
 
-が非技術者にも短時間で分かるServicesセクションへ改善する。
+を整える。
 
-今回の任務は **現在のSkillsセクションだけ** を対象にする。
+今回の任務は **可読性と情報階層の調整** が目的。
 
-Heroで整理した価値提案を受け取り、
-その次に「具体的に何を頼めるのか」を説明する役割へ変える。
-
----
-
-## 対象
-
-### 公開サイト
-
-https://lazygenius.dev/
-
-### ローカル開発環境
-
-http://localhost:10016/
-
-### 対象範囲
-
-- 現在のSkillsセクション
-- Skillsセクション内の見出し・本文
-- Skillsセクション内のレイアウト
-- Skillsセクションに直接関係するCSS
-- Skillsセクションに直接関係するresponsive
-- 必要な範囲のhover / focus / interaction
-
-既存の `#skills` anchor ID は維持すること。
+新しい機能や新しい情報は追加しない。
 
 ---
 
-## 任務開始前に読むもの
+# 最重要方針
+
+現在のWorksは方向性として正しい。
+
+今回やることは再設計ではなく、
+
+**「読みにくいところだけを整える」**
+
+こと。
+
+特に次の2点を優先する。
+
+1. Selected Worksの本文を素直な縦積みにできるか確認する
+2. Other Worksのpadding / font-size / 情報密度を改善する
+
+---
+
+# 任務開始前に読むもの
 
 1. `AGENTS.md`
 2. `docs/LG_DEVELOPMENT_PHILOSOPHY.md`
 3. `docs/LG_PROJECT_INITIAL_FLOW.md`
 4. `.codex/checklists/DONE.md`
 5. `.agents/skills/redesign-existing-projects/SKILL.md`
-6. UI・情報設計監査報告
-7. 直前のHero改修内容
-8. Skillsに関係するtemplate part
-9. Skillsに関係するCSS
-10. 既存Works / Client Work / README等、現在の能力を裏づける情報
+6. MISSION_007 実施報告
+7. 現在のWorks画面
+8. Works関連CSS
+9. Works関連responsive CSS
+10. `template-parts/section-works.php`
 
-今回の任務はUI・情報設計・responsiveを含むため、
+今回もUI調整のため、
 `redesign-existing-projects` Skillを使用すること。
 
 ---
 
-## 現状の課題
+# PART A — Selected Worksを縦積みで再検討する
 
-現在のSkillsは主に技術分類で構成されている。
+## 現在の対象CSS
 
-例：
+現在、以下のような2カラム構成が存在する。
 
-- HTML / CSS
-- JavaScript / jQuery
-- PHP / WordPress
-- Laravel
-- React / TypeScript
-- Git / GitHub
-
-技術者には理解しやすいが、
-非技術者は「自分の課題をどれに相談すればよいか」を
-技術名から逆算する必要がある。
-
-また、均等な技術カードが並ぶことで、
-実際に優先して提供したい仕事の強弱が見えにくい。
-
----
-
-## 今回の情報設計
-
-Skillsを、次の3つの「任せられる仕事」へ再編集する。
-
-### 1. Webサイトを作る・直す
-
-想定内容：
-
-- WordPressサイトの制作
-- 既存WordPressの改修
-- LP / 小規模サイト制作
-- 表示崩れ・UI改善
-- フォームや小機能の追加
-- 保守しやすい構造への整理
-
-技術名は主役にせず、
-必要に応じて補足情報として表示する。
-
-候補技術：
-
-- WordPress
-- PHP
-- HTML / CSS
-- JavaScript / TypeScript
-
-### 2. 手作業を仕組みに変える
-
-想定内容：
-
-- 公開Web情報の取得
-- データ整理
-- 重複判定
-- 定型作業の自動化
-- 小規模Webアプリ
-- API連携
-- 再実行可能な処理への置き換え
-
-候補技術：
-
-- PHP / Laravel
-- JavaScript / TypeScript
-- API
-- Playwright等のブラウザ自動化
-- Google系サービス等
-
-既存コード・実績で確認できない能力を新規に断定しないこと。
-
-### 3. 公開・運用までつなげる
-
-想定内容：
-
-- ローカル実装だけで終わらせない
-- サーバー / ホスティング環境への公開
-- Gitを使った変更管理
-- GitHub Actions等による配備
-- Cloudflare / Vercel / Xserver等の目的別利用
-- 公開後に変更しやすい状態へ整理
-
-候補技術：
-
-- Git / GitHub
-- GitHub Actions
-- Cloudflare
-- Vercel
-- Xserver
-- Vite
-
-具体名は、現在の実績・コードで裏づけられるものだけ使う。
-
----
-
-## 情報の優先順位
-
-各サービスは次の順で理解できるようにする。
-
-```text
-利用者の課題
-↓
-任せられる仕事
-↓
-得られる状態
-↓
-使用する技術（補足）
+```css
+.works__case-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(16rem, 0.7fr);
+  gap: var(--space-xl);
+  padding-inline-start: calc(4rem + var(--space-l));
+}
 ```
 
-技術名を見出しにしない。
-
-「何ができます」だけでなく、
-利用者から見て何が楽になるか・何が整理されるかを説明する。
-
-ただし未確認の成果数値や断定表現は追加しない。
+この構成について、
+**素直な縦積みの方が読みやすいかを優先して検討する。**
 
 ---
 
-## Visual Design方針
+## 仮説
 
-Taste Skillを使い、
-既存の暗色・金色・明朝見出しのブランドを維持する。
+Problem Firstでは、
 
-### 重要
+```text
+困りごと
+↓
+こう工夫した
+↓
+こう変わる
+↓
+できたもの
+↓
+担当したこと
+↓
+使用技術
+↓
+GitHub
+```
 
-**3サービスだからといって、機械的な均等3カードにしない。**
+と上から下へ読む方が自然である。
 
-Taste Skillのanti-slop方針に従い、
-情報の重要度と文章量に応じてレイアウトを決める。
+現在の2カラムは、
+情報を横へ分散させることで
+読み順を少し複雑にしている可能性がある。
+
+---
+
+## 確認すること
+
+縦積みにした場合、
+
+- ProblemからEvidenceまで自然に読めるか
+- Repositoryが本文より強くならないか
+- desktopで横に間延びしないか
+- 1440pxでも本文幅が広がりすぎないか
+- Selected Worksが縦長になりすぎないか
+- 余白でcase studyらしい呼吸を作れるか
+
+を確認する。
+
+---
+
+## 推奨方向
+
+第一候補：
+
+```css
+.works__case-content {
+  display: block;
+}
+```
+
+または、
+必要なら1カラムgrid。
+
+```css
+.works__case-content {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+```
+
+その上で、
+
+- Approach
+- Outcome
+- Evidence
+
+の各ブロック間をspacingで整理する。
+
+**横並びを残す理由が弱ければ、縦積みを採用する。**
+
+---
+
+## 左インデント
+
+現在の、
+
+```css
+padding-inline-start: calc(4rem + var(--space-l));
+```
+
+も再評価する。
+
+Problem番号 `01 / 02 / 03` と本文の視覚関係を確認し、
+
+- インデントが深すぎないか
+- desktopで本文が必要以上に右へ寄っていないか
+- mobileとの切替が不自然でないか
+
+を見る。
+
+必要なら減らしてよい。
+
+ただし番号の役割は維持する。
+
+---
+
+# PART B — Other Worksの可読性を上げる
+
+## 現在の問題
+
+Other Worksは、
+
+- paddingが小さい
+- 文字が小さい
+- Problem / 工夫 / 証拠の密度が高い
+- Selected Worksより情報が詰まって見える
+- 下のClient Work / Supportより弱く見える
+
+状態になっている。
+
+---
+
+## 目標
+
+Other Worksを、
+
+**「縮小版Selected Works」**
+
+として読めるようにする。
+
+ただしSelected Worksほど大きくしない。
+
+---
+
+## 情報階層
+
+強い順：
+
+1. Problem / Learning Theme
+2. 工夫
+3. Repository
+4. 技術
+5. GitHubリンク
+
+ProblemまたはLearning Themeを
+一番読みやすくする。
+
+---
+
+## Font調整
+
+現在のfont-sizeを実測し、
+必要なら一段上げる。
+
+方針：
+
+- Problem / Learning Theme: 最も大きい
+- 工夫: 通常本文
+- Repository: 少し弱い
+- 技術: さらに弱い
+- GitHub: 行動として見つけやすい
+
+小さすぎる文字を使わない。
+
+特にdesktopで、
+Other Worksだけ極端に小さく見えないようにする。
+
+---
+
+## Padding調整
+
+各Other Workの上下paddingを増やす。
+
+目安として、
+現在より **1.3〜1.6倍程度** を候補にする。
+
+ただし固定倍率をそのまま採用せず、
+既存space tokenで自然な値を選ぶ。
+
+---
+
+## Row間の区切り
+
+新しいカード背景は増やさない。
 
 候補：
 
-- 1つを主サービスとして広く扱う非対称構成
-- 縦方向のservice list
-- 2カラム + 1項目を横長にする構成
-- editorialな番号付き構成
+- border-bottom
+- spacing
+- 細い紅赤rule
+- section divider
 
-既存画面を観測して最も自然な方式を選ぶこと。
+など、
+最小限の区切りを使う。
 
-### 優先度
-
-現在のサイト文脈では、
-**「Webサイトを作る・直す」** を最も強い入口として扱う。
-
-他2サービスを同格に見せる必要はない。
+すべての行へ太いborderや背景面を追加しない。
 
 ---
 
-## 文言方針
+# PART C — Other Worksのレイアウト
 
-非技術者が読んで意味が分かる日本語を優先する。
+## 現在の3列構成
 
-良い方向：
+desktopで、
 
-- WordPressサイトを作る・直す
-- 手作業の情報収集を仕組みに変える
-- 実装したものを公開・運用までつなげる
-- 変更しやすい状態へ整理する
+```text
+Problem | 工夫 | 証拠
+```
 
-避ける方向：
-
-- フルスタック対応
-- モダン技術対応
-- DX支援
-- 高品質な開発
-- 柔軟なソリューション
-- ワンストップ対応
-
-抽象語だけで価値を説明しない。
-
-技術名は証拠・補足として使う。
+の3列になっている場合、
+読み順が分散して見える可能性がある。
 
 ---
 
-## 既存資産の扱い
+## 推奨検討
 
-現在のSkillsにある有効な説明文・技術情報は捨てず、
-新しいServicesの補足へ再配置してよい。
+2カラムへ寄せる。
+
+```text
+Problem + 工夫 | 証拠
+```
+
+左側を主内容、
+右側をRepository / 技術 / GitHubの証拠欄にする。
+
+比率の目安：
+
+```text
+70% | 30%
+```
+
+または、
+
+```text
+2fr | 1fr
+```
 
 ただし、
-
-- 事実を増やさない
-- 実績を捏造しない
-- 未確認の対応領域を追加しない
-- Worksの内容を変更しない
-
-こと。
-
-必要に応じて既存Worksを読み、
-Servicesの表現が実績と矛盾しないか確認する。
+実際の文章量を見て決める。
 
 ---
 
-## 実装方針
+## Mobile
 
-1. 現在のSkills構造とCSSを確認する
-2. 現在の技術情報を分類する
-3. 3サービスへ意味を再配置する
-4. 情報階層を決める
-5. 最小限のHTML / CSS変更で実装する
-6. responsiveを確認する
-7. hover / focus等、存在するinteractionを確認する
+mobileでは必ず縦積み。
 
-既存tokenを優先して再利用する。
+```text
+Problem
+↓
+工夫
+↓
+Repository
+↓
+技術
+↓
+GitHub
+```
 
-新しいライブラリは追加しない。
+横並びを無理に維持しない。
 
 ---
 
-## 変更禁止
+# PART D — Selected WorksとOther Worksの関係
 
-今回変更してはいけないもの：
+Works全体で、
+同じ思想に見えることを優先する。
 
+```text
+Selected Works
+= 詳細なProblem First case study
+
+Other Works
+= コンパクトなProblem First issue log
+```
+
+この関係が見えるようにする。
+
+---
+
+# PART E — Client Work / Supportとのバランス
+
+Client Work / Supportは今回の主対象ではない。
+
+ただし、
+Other Worksを整えた結果、
+
+- Other Worksが弱すぎないか
+- Client Work / Supportが強すぎないか
+- Works全体で視覚的な序列が自然か
+
+を確認する。
+
+Client Work / Supportの構造変更はしない。
+
+必要な場合でも、
+Works内のspacing調整に留める。
+
+---
+
+# PART F — 色
+
+既存方針を維持する。
+
+## 紅赤 `#D93A49`
+
+- Problemの視線誘導
+- issue番号
+- 細いrule
+- selected state
+
+に限定する。
+
+## Gold
+
+- GitHubリンク
+- 行動
+- CTA
+
+に使う。
+
+今回、色の役割は変更しない。
+
+---
+
+# PART G — 変更してよいもの
+
+- Works関連CSS
+- Works関連responsive CSS
+- Selected Worksのlayout
+- Other Worksのlayout
+- Other Worksのfont-size
+- Other Worksのpadding
+- Works内のspacing
+- Works内のmax-width
+- Works内のgrid構成
+
+---
+
+# 変更禁止
+
+- Works文言
+- Problem / Approach / Outcomeの内容
+- Repository名
+- GitHub URL
+- Selected Works 3件の選定
+- Other Worksの分類
+- Problem / Learning Themeの区別
 - Hero
+- Services
 - About
-- Works
-- Worksカード
 - Flow
 - FAQ
 - Contact
-- Contact Ajax
-- PHPロジック
-- API
-- DB
+- Header
+- Footer
+- JavaScript
 - React
-- Review Lab
-- JavaScript / TypeScriptの既存挙動
 - Vite設定
 - `package.json`
 - WordPress設定
-- Header
-- Footer
-- URL
-- `#skills` anchor ID
-- 他セクションの順序
-- ブランドカラーの全面変更
-- フォント変更
-
-Taste Skillを理由に、
-Services以外を同時改修しない。
+- 新規ライブラリ
+- Gold / 紅赤tokenの意味
 
 ---
 
-## Accessibility
+# PART H — Responsive確認
 
-最低限、以下を確認する。
-
-- heading階層が自然
-- 意味のないクリック要素を作らない
-- linkが存在する場合はkeyboard操作可能
-- focus-visibleを維持
-- 色だけで情報の強弱を表現しない
-- 本文の可読幅を維持
-- smartphoneで文字が小さくなりすぎない
-
----
-
-## Responsive確認幅
-
-最低限、以下で確認する。
+最低限、
 
 - 320px
 - 375px
 - 390px
 - 768px
+- 1024px
 - 1440px
 
-確認項目：
+で確認する。
 
-- 横スクロールが発生しない
-- サービス名が不自然に欠落しない
-- 本文が読みやすい
-- 技術補足が本文より強くならない
-- 3サービスの優先順位が維持される
-- smartphoneで過剰なカード縦長化が起きない
-- desktopで間延びしない
-- HeroからServicesへの流れが自然
+今回はdesktopの密度調整が重要なので、
+1024pxも追加する。
 
 ---
 
-## 検証
+## 確認項目
 
-実装後、既存scriptに従って検証する。
+- Selected Worksが自然に上から下へ読める
+- 2カラム由来の視線分散が減っている
+- desktopで本文が横に広がりすぎない
+- Other Worksの文字が小さすぎない
+- Other Worksのpaddingが十分
+- 各作品の境界が分かる
+- Client Work / Supportとの優先度が自然
+- Repository名が主役に戻っていない
+- 技術一覧が強く見えない
+- GitHubリンクが見つけやすい
+- 横overflowが発生しない
+- Worksタブが正常に動く
 
-最低限：
+---
+
+# PART I — Accessibility
+
+- heading階層を維持する
+- font-sizeを下げすぎない
+- line-heightを十分確保する
+- linkのfocus-visibleを維持する
+- 色だけで区別しない
+- 長文の1行幅を広げすぎない
+- mobileでtap targetを維持する
+
+---
+
+# 検証
+
+実装後、
 
 ```bash
 npm run build
 git diff --check
 ```
 
-PHPを変更した場合：
+PHPを変更していない場合、
+PHP syntax checkは不要。
 
-```bash
-php -l 対象ファイル
-```
-
-`package.json` に個別scriptが存在する場合は、
-既存設定に従ってtypecheck / lintも実行する。
-
-ローカルWordPressで実画面確認する。
+既存scriptがある場合は、
+typecheck / lint / testも実施する。
 
 ---
 
-## 報告形式
+# 報告形式
 
-### 1. 変更前の問題
+## 1. Selected Works
 
-- 技術分類中心だったこと
-- 非技術者が判断しにくかった理由
-- 情報階層上の問題
+- 2カラムを残したか
+- 縦積みにしたか
+- その理由
+- `.works__case-content` をどう変更したか
+- 左インデントをどう扱ったか
 
-### 2. 新しいServices構成
+---
 
-各サービスについて、
+## 2. Other Works
 
-- サービス名
-- 想定課題
-- 任せられる仕事
-- 得られる状態
-- 補足技術
-
-を説明する。
-
-### 3. UI変更
-
+- font-size
+- line-height
+- padding
 - layout
-- typography
-- spacing
-- surface
-- component
-- interaction
+- evidence欄
 
-を簡潔に説明する。
+をどう変えたか報告する。
 
-### 4. Taste Skillの判断
+---
 
-- genericな均等カードをどう避けたか
-- 情報の優先順位をどう視覚化したか
-- 既存ブランドをどう維持したか
+## 3. Layout判断
 
-### 5. 変更しなかったもの
+- desktop
+- tablet
+- mobile
 
-任務境界を守ったことを明記する。
+でどう情報量を整理したか説明する。
 
-### 6. Responsive確認
+---
 
-320 / 375 / 390 / 768 / 1440pxの結果を報告する。
+## 4. Client Work / Supportとのバランス
 
-### 7. 自動検証
+Other Worksとの視覚優先度をどう確認したか報告する。
 
-- PHP syntax
+---
+
+## 5. Taste Skillの判断
+
+- なぜ縦積みを選んだ / 選ばなかったか
+- なぜ3列を残した / 崩したか
+- 余白と文字サイズをどう決めたか
+- generic card化をどう避けたか
+
+を報告する。
+
+---
+
+## 6. Responsive確認
+
+320 / 375 / 390 / 768 / 1024 / 1440pxの結果。
+
+---
+
+## 7. 自動検証
+
 - typecheck
 - lint
+- test
 - build
 - `git diff --check`
 
-実行したものと結果を報告する。
+---
 
-### 8. 残課題
+## 8. 残課題
 
-今回の任務外で気付いたことは記録だけする。
-
-修正しない。
+任務外で気付いた問題は記録だけする。
 
 ---
 
-## 完了条件
+# 完了条件
 
 以下をすべて満たしたら任務完了。
 
-- Skillsを利用者視点のServicesへ再編集した
-- `#skills` anchor IDを維持した
-- 技術名ではなく「任せられる仕事」が先に伝わる
-- 3サービスの優先順位が視覚的に分かる
-- 「Webサイトを作る・直す」を最重要として扱った
-- 技術情報を捨てず補足へ再配置した
-- 未確認の実績・成果を追加していない
-- genericな均等3カードを避けた
-- 既存ブランド・tokenを維持した
-- 320 / 375 / 390 / 768 / 1440pxで確認した
-- 横スクロールが発生しない
-- 任務外のセクションを変更していない
-- build等の既存検証を通した
+- WorksのProblem First構成を維持した
+- Selected Worksの2カラムを再評価した
+- 縦積みが自然なら採用した
+- `.works__case-content` の情報順を単純化した
+- Other Worksのpaddingを改善した
+- Other Worksのfont hierarchyを改善した
+- Other WorksをSelected Worksの縮小版として読める
+- Repository名を主役に戻していない
+- 技術を補足情報のまま維持した
+- Client Work / Supportとのバランスを確認した
+- Gold / 紅赤の役割を維持した
+- 320 / 375 / 390 / 768 / 1024 / 1440pxで確認した
+- 横overflowが発生しない
+- Worksタブが正常に動く
+- build等の検証を通した
 - `git diff --check` を通した
 - commit / pushは明示指示があるまで行っていない
