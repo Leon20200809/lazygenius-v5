@@ -72,6 +72,73 @@
     line-height: 1.9;
   }
 
+  /* Heroから相談と実績確認へ進む行動を明確にする */
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-s);
+    margin-bottom: var(--space-l);
+  }
+
+  .hero-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: var(--space-s) var(--space-l);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-s);
+    font-weight: 700;
+    line-height: 1.4;
+    text-decoration: none;
+    transition:
+      background-color var(--dur) var(--ease),
+      color var(--dur) var(--ease),
+      transform var(--dur) var(--ease);
+  }
+
+  .hero-action--primary {
+    color: var(--color-bg);
+    background-color: var(--color-accent);
+  }
+
+  .hero-action--secondary {
+    color: var(--color-accent);
+    background-color: color-mix(in srgb, var(--color-bg) 72%, transparent);
+  }
+
+  .hero-action:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  .hero-action--primary:hover {
+    color: var(--color-bg);
+    background-color: var(--color-accent-hover);
+  }
+
+  .hero-action--secondary:hover {
+    color: var(--color-bg);
+    background-color: var(--color-accent);
+  }
+
+  .hero-action:active {
+    transform: translateY(0);
+  }
+
+  .hero-action:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  .hero-tech {
+    margin-bottom: var(--space-xs);
+    color: var(--color-muted);
+    font-size: var(--fs-xs);
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+  }
+
   .hero-name {
     color: var(--color-muted);
     font-size: var(--fs-base);
@@ -174,53 +241,147 @@
     background: var(--color-bg-alt);
   }
 
+  .skills__heading {
+    max-width: 46rem;
+    margin-bottom: var(--space-xl);
+  }
+
+  .skills__eyebrow {
+    margin-bottom: var(--space-xs);
+    color: var(--color-accent);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .skills__title {
+    margin-top: 0;
+    margin-bottom: var(--space-m);
+    text-align: left;
+  }
+
+  .skills__lead {
+    max-width: 42rem;
+    margin: 0;
+    color: var(--color-muted);
+    font-size: var(--fs-lg);
+    line-height: 1.9;
+  }
+
+  /* 主サービスを横長に見せ、補助サービスを下段へ並べる */
   .skills__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-l);
   }
 
-  /* カード */
-  .skills__card {
+  .skills__service {
+    position: relative;
     padding: var(--space-l);
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-m);
-    box-shadow: var(--shadow-m);
-
-    transition:
-      transform var(--dur) var(--ease),
-      border-color var(--dur) var(--ease),
-      box-shadow var(--dur) var(--ease);
+    border-top: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-bg) 94%, white 6%);
   }
 
-  /* ホバー（やりすぎない） */
-  .skills__card:hover {
-    transform: translateY(-4px);
-    border-color: var(--color-accent);
-    box-shadow: var(--shadow-l);
+  .skills__service--primary {
+    grid-column: 1 / -1;
+    padding: var(--space-xl);
+    border-top-color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-bg) 88%, var(--color-accent) 12%);
   }
 
-  /* 技術名 */
+  .skills__number {
+    margin: 0 0 var(--space-m);
+    color: var(--color-accent);
+    font-family: var(--font-heading);
+    font-size: var(--fs-sm);
+    letter-spacing: 0.12em;
+  }
+
+  .skills__problem {
+    max-width: 34rem;
+    margin: 0 0 var(--space-xs);
+    color: var(--color-muted);
+    font-size: var(--fs-sm);
+    line-height: 1.7;
+  }
+
   .skills__name {
-    margin-bottom: var(--space-s);
+    margin: 0 0 var(--space-m);
     font-family: var(--font-heading);
     font-size: var(--fs-lg);
     color: var(--color-accent);
-    letter-spacing: 0.05em;
+    line-height: 1.5;
+    letter-spacing: 0.03em;
   }
 
-  /* 説明 */
-  .skills__text {
-    font-size: var(--fs-base);
+  .skills__service--primary .skills__name {
+    max-width: 34rem;
+    color: var(--color-text);
+    font-size: var(--fs-xl);
+  }
+
+  .skills__summary,
+  .skills__outcome {
+    max-width: 38rem;
+    margin: 0;
     line-height: 1.9;
+  }
+
+  .skills__summary {
+    color: var(--color-text);
+  }
+
+  .skills__outcome {
+    margin-top: var(--space-m);
     color: var(--color-muted);
   }
 
-  .skills__text br {
-    display: block;
-    margin-bottom: 0.25em;
-    content: "";
+  .skills__details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-l);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-l);
+    border-top: 1px solid color-mix(in srgb, var(--color-accent) 38%, transparent);
+  }
+
+  .skills__detail-title {
+    margin: 0 0 var(--space-s);
+    color: var(--color-accent);
+    font-size: var(--fs-sm);
+    letter-spacing: 0.06em;
+  }
+
+  .skills__list {
+    display: grid;
+    gap: var(--space-xs);
+  }
+
+  .skills__list li {
+    position: relative;
+    padding-inline-start: var(--space-m);
+    line-height: 1.8;
+  }
+
+  .skills__list li::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--color-accent);
+    content: "—";
+  }
+
+  .skills__tech {
+    margin: var(--space-l) 0 0;
+    color: var(--color-muted);
+    font-size: var(--fs-sm);
+    line-height: 1.8;
+  }
+
+  .skills__tech span {
+    margin-inline-end: var(--space-xs);
+    color: var(--color-accent);
+    font-weight: 700;
   }
 
   /* ========================================

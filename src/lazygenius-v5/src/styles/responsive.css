@@ -8,6 +8,16 @@
       background-image: var(--hero-bg-image-sp);
     }
 
+    /* 狭い画面ではHero CTAを縦に並べて押下領域を確保する */
+    .hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hero-action {
+      width: 100%;
+    }
+
     /* ハンバーガー表示、ナビはドロップダウン風 */
     [data-lg-nav] {
       position: absolute;
@@ -101,6 +111,29 @@
       max-width: 420px;
       margin-inline: auto;
     }
+
+    /* ========================================
+  セクション services
+  ======================================== */
+    .skills__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-m);
+    }
+
+    .skills__service,
+    .skills__service--primary {
+      grid-column: auto;
+      grid-row: auto;
+      padding: var(--space-l) 0;
+      background: transparent;
+    }
+
+    .skills__details {
+      grid-template-columns: 1fr;
+      gap: var(--space-m);
+      margin-top: var(--space-l);
+    }
+
     /* ========================================
   セクション works
   ======================================== */

@@ -1,64 +1,70 @@
 <!-- section-skills.php -->
 <section class="skills" id="skills">
     <div class="lg-container">
-        <h2 class="section-title">Skills</h2>
+        <div class="skills__heading">
+            <p class="skills__eyebrow">Services</p>
+            <h2 class="section-title skills__title">相談できること</h2>
+            <p class="skills__lead">
+                技術が決まっていない段階でも、目的と現在の困りごとを整理し、
+                必要な実装と公開後の扱いやすさまで考えて形にします。
+            </p>
+        </div>
 
+        <!-- 利用者の課題から選べる3つのサービスを案内する -->
         <div class="skills__grid">
-            <article class="skills__card">
-                <h3 class="skills__name">HTML / CSS</h3>
-                <p class="skills__text">
-                    ・レスポンシブ対応（スマホでも見やすい）<br>
-                    ・LP制作、BEM設計（崩れにくい構造）<br>
-                    ・保守しやすいCSS設計
+            <article class="skills__service skills__service--primary">
+                <p class="skills__number" aria-hidden="true">01</p>
+                <p class="skills__problem">サイトを新しく作りたい、今あるWordPressを直したい</p>
+                <h3 class="skills__name">Webサイトを作る・直す</h3>
+                <p class="skills__summary">
+                    WordPressサイトやLPの制作、既存サイトの表示・機能改修に対応します。
+                    フォームや更新機能も含め、あとから変更しやすい構造へ整理します。
                 </p>
+
+                <div class="skills__details">
+                    <div>
+                        <h4 class="skills__detail-title">任せられること</h4>
+                        <ul class="skills__list">
+                            <li>WordPressサイト・LP・小規模サイトの制作</li>
+                            <li>表示崩れやレスポンシブ、UIの改善</li>
+                            <li>フォーム、カスタム投稿、管理画面の調整</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="skills__detail-title">目指す状態</h4>
+                        <p class="skills__outcome">
+                            必要な機能が動くだけでなく、公開後も更新・保守しやすい状態へつなげます。
+                        </p>
+                    </div>
+                </div>
+
+                <p class="skills__tech"><span>使用技術</span> WordPress / PHP / HTML / CSS / JavaScript / TypeScript</p>
             </article>
 
-            <article class="skills__card">
-                <h3 class="skills__name">JavaScript / jQuery</h3>
-                <p class="skills__text">
-                    ・ハンバーガーメニュー<br>
-                    ・スライダー画像ギャラリー<br>
-                    ・アコーディオンメニュー<br>
-                    ・Ajax処理（ページ遷移なしで更新）
+            <article class="skills__service skills__service--secondary">
+                <p class="skills__number" aria-hidden="true">02</p>
+                <p class="skills__problem">情報収集やデータ整理を、毎回手で繰り返している</p>
+                <h3 class="skills__name">手作業を仕組みに変える</h3>
+                <p class="skills__summary">
+                    Web情報の取得、データ整理、重複判定などの定型作業を、繰り返し実行できる小さなツールやWebアプリへ置き換えます。
                 </p>
+                <p class="skills__outcome">
+                    作業手順とデータの流れが見え、同じ処理を再実行できる状態を目指します。
+                </p>
+                <p class="skills__tech"><span>使用技術</span> PHP / Laravel / JavaScript / TypeScript / API / Google Sheets</p>
             </article>
 
-            <article class="skills__card">
-                <h3 class="skills__name">PHP / WordPress</h3>
-                <p class="skills__text">
-                    ・オリジナルテーマ制作<br>
-                    ・カスタム投稿追加（更新しやすい仕組み）<br>
-                    ・問い合わせフォーム<br>
-                    ・管理画面カスタマイズ
+            <article class="skills__service skills__service--tertiary">
+                <p class="skills__number" aria-hidden="true">03</p>
+                <p class="skills__problem">作ったものを公開し、あとから安全に変更したい</p>
+                <h3 class="skills__name">公開・運用までつなげる</h3>
+                <p class="skills__summary">
+                    ローカル実装だけで終わらせず、ホスティング環境への公開とGitによる変更管理まで整えます。
                 </p>
-            </article>
-
-            <article class="skills__card">
-                <h3 class="skills__name">Laravel</h3>
-                <p class="skills__text">
-                    ・認証機能、CRUD（データの登録・編集・削除）<br>
-                    ・タスク管理アプリ<br>
-                    ・組織図閲覧アプリ<br>
-                    ・Docker環境構築
+                <p class="skills__outcome">
+                    公開後の修正履歴を追えて、必要な更新を反映しやすい状態へつなげます。
                 </p>
-            </article>
-
-            <article class="skills__card">
-                <h3 class="skills__name">React / TypeScript</h3>
-                <p class="skills__text">
-                    ・Next.js（Web履歴書サイトなどのUI構築）<br>
-                    ・CSVデータ表示（Google Sheets連携）<br>
-                    ・UIコンポーネント設計（再利用性重視）<br>
-                    ・ポモドーロタイマー<br>
-                </p>
-            </article>
-
-            <article class="skills__card">
-                <h3 class="skills__name">Git / GitHub</h3>
-                <p class="skills__text">
-                    ・バージョン管理<br>
-                    ・GitHub Actions、自動デプロイ（更新を自動化）
-                </p>
+                <p class="skills__tech"><span>使用技術</span> Git / GitHub / GitHub Actions / Vite / Vercel / Xserver</p>
             </article>
         </div>
     </div>
