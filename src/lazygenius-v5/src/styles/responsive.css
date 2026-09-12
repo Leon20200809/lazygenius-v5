@@ -218,7 +218,18 @@
       max-width: 100%;
     }
 
+    .flow__summary-item {
+      grid-template-columns: 2.5rem minmax(0, 1fr);
+      gap: var(--space-s);
+      padding-block: var(--space-l);
+    }
+
+    .flow__summary-number {
+      font-size: var(--fs-lg);
+    }
+
     .acc-trigger {
+      min-height: 3.25rem;
       font-size: var(--fs-base);
     }
 
@@ -227,6 +238,15 @@
   ======================================== */
     .contact-form {
       padding: var(--space-m);
+    }
+
+    .contact-actions {
+      align-items: stretch;
+      flex-direction: column-reverse;
+    }
+
+    .contact-actions button {
+      width: 100%;
     }
   }
 }

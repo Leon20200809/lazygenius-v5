@@ -30,7 +30,7 @@
 
         <div class="contact-actions contact-confirm__actions">
             <button type="button" class="js-back-btn">入力に戻る</button>
-            <button type="button" class="js-submit-btn">送信する</button>
+            <button type="button" class="js-submit-btn">相談内容を送る</button>
         </div>
     </div>
 </div>

@@ -1,11 +1,43 @@
 <!-- section-flow.php -->
 <section class="flow" id="flow">
     <div class="lg-container">
-        <h2 class="section-title">Flow</h2>
+        <div class="journey-heading">
+            <p class="journey-heading__eyebrow">How to start</p>
+            <h2 class="section-title journey-heading__title">Flow</h2>
+            <p class="flow__lead">
+                完成した依頼内容は必要ありません。困っていることを聞き、触る範囲を整理してから進めます。
+            </p>
+        </div>
 
-        <p class="flow__lead">
-            お問い合わせから納品まで、制作の流れをわかりやすくご案内します。
-        </p>
+        <!-- 相談から公開までの全体像を3段階で先に示す -->
+        <ol class="flow__summary">
+            <li class="flow__summary-item">
+                <p class="flow__summary-number" aria-hidden="true">01</p>
+                <div>
+                    <h3>まず困りごとを聞く</h3>
+                    <p>「ここが面倒」「この表示を直したい」から始められます。URLがあれば、あわせて確認します。</p>
+                </div>
+            </li>
+            <li class="flow__summary-item">
+                <p class="flow__summary-number" aria-hidden="true">02</p>
+                <div>
+                    <h3>何を直すか整理する</h3>
+                    <p>今の状態を見て、変える場所・対応する範囲・触らない場所を整理します。この時点で費用と進め方を確認します。</p>
+                </div>
+            </li>
+            <li class="flow__summary-item">
+                <p class="flow__summary-number" aria-hidden="true">03</p>
+                <div>
+                    <h3>作る・確認する・公開する</h3>
+                    <p>小さく作って確認し、必要な修正を反映します。依頼内容に応じて公開後の更新にもつなげます。</p>
+                </div>
+            </li>
+        </ol>
+
+        <div class="flow__details-heading">
+            <h3>詳しい進み方</h3>
+            <p>相談後の工程を確認したい場合は、各項目を開いてください。</p>
+        </div>
 
         <div class="flow__accordion" data-lg-accordion>
 
@@ -16,7 +48,7 @@
                     aria-expanded="false"
                     aria-controls="flow-panel-1"
                     id="flow-heading-1">
-                    お問い合わせ（Step 1）
+                    困っていることを送る（1）
                 </button>
             </h3>
             <div
@@ -26,7 +58,7 @@
                 aria-labelledby="flow-heading-1"
                 hidden>
                 <p>
-                    サイト制作や修正、機能追加など、ご相談内容をお問い合わせフォームよりお送りください。
+                    内容が固まっていなくても大丈夫です。分かる範囲で、困っていることや対象のURLをお送りください。
                 </p>
             </div>
 
@@ -37,7 +69,7 @@
                     aria-expanded="false"
                     aria-controls="flow-panel-2"
                     id="flow-heading-2">
-                    ヒアリング（Step 2）
+                    今の状態を確認する（2）
                 </button>
             </h3>
             <div
@@ -47,7 +79,7 @@
                 aria-labelledby="flow-heading-2"
                 hidden>
                 <p>
-                    ご希望の内容や目的、必要な機能、ご予算などを確認し、方向性を整理します。
+                    画面や作業手順を見ながら、何が問題か、どこまで直す必要があるかを確認します。
                 </p>
             </div>
 
@@ -58,7 +90,7 @@
                     aria-expanded="false"
                     aria-controls="flow-panel-3"
                     id="flow-heading-3">
-                    ご提案・お見積もり（Step 3）
+                    対応範囲と費用を決める（3）
                 </button>
             </h3>
             <div
@@ -68,7 +100,7 @@
                 aria-labelledby="flow-heading-3"
                 hidden>
                 <p>
-                    ヒアリング内容をもとに、制作方針・スケジュール・お見積もりをご案内します。
+                    変える場所と触らない場所、確認方法、費用、予定をお伝えします。合意する前に作業は始めません。
                 </p>
             </div>
 
@@ -79,7 +111,7 @@
                     aria-expanded="false"
                     aria-controls="flow-panel-4"
                     id="flow-heading-4">
-                    制作開始（Step 4）
+                    小さく作り始める（4）
                 </button>
             </h3>
             <div
@@ -89,7 +121,7 @@
                 aria-labelledby="flow-heading-4"
                 hidden>
                 <p>
-                    内容確定後、制作を開始します。必要に応じて進捗共有や確認を行います。
+                    決めた範囲から作り始めます。途中で確認が必要な点は、その都度共有します。
                 </p>
             </div>
 
@@ -100,7 +132,7 @@
                     aria-expanded="false"
                     aria-controls="flow-panel-5"
                     id="flow-heading-5">
-                    確認・修正（Step 5）
+                    画面や動きを確認する（5）
                 </button>
             </h3>
             <div
@@ -110,7 +142,7 @@
                 aria-labelledby="flow-heading-5"
                 hidden>
                 <p>
-                    完成後にご確認いただき、必要に応じて修正対応を行います。
+                    実際の画面や動きを確認していただき、決めた範囲に沿って必要な修正を反映します。
                 </p>
             </div>
 
@@ -121,7 +153,7 @@
                     aria-expanded="false"
                     aria-controls="flow-panel-6"
                     id="flow-heading-6">
-                    納品・公開（Step 6）
+                    公開し、必要なら運用へつなぐ（6）
                 </button>
             </h3>
             <div
@@ -131,7 +163,7 @@
                 aria-labelledby="flow-heading-6"
                 hidden>
                 <p>
-                    最終確認後、納品または公開対応を行います。公開後のご相談も可能です。
+                    最終確認後に納品または公開します。公開後の更新や小さな修正も、必要に応じてご相談いただけます。
                 </p>
             </div>
 

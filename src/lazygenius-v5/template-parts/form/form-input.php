@@ -8,7 +8,7 @@
                 type="text"
                 id="contact-name"
                 name="name"
-                placeholder="お名前"
+                placeholder="例：山田 太郎"
                 required>
         </div>
 
@@ -19,7 +19,7 @@
                 type="email"
                 id="contact-email"
                 name="email"
-                placeholder="メールアドレス"
+                placeholder="例：name@example.com"
                 required>
         </div>
 
@@ -38,12 +38,14 @@
         </div>
 
         <div class="contact-row">
-            <label class="contact-row__label" for="contact-message">ご依頼・ご相談の詳細</label>
+            <label class="contact-row__label" for="contact-message">困っていること・相談したいこと</label>
+            <p class="contact-row__help" id="contact-message-help">対象のURL、直したい場所、今困っていることなど、分かる範囲で構いません。</p>
             <textarea
                 class="contact-row__control"
                 id="contact-message"
                 name="message"
-                placeholder="ご希望内容・お困りごと・ご予算などをご記入ください。"
+                aria-describedby="contact-message-help"
+                placeholder="例：スマートフォンでメニューが崩れます。対象URLは https://example.com です。"
                 required></textarea>
         </div>
 
@@ -73,7 +75,7 @@
         </div>
 
         <div class="contact-actions">
-            <button type="button" class="js-confirm-btn">確認する</button>
+            <button type="button" class="js-confirm-btn">相談内容を確認する</button>
         </div>
     </form>
 </div>

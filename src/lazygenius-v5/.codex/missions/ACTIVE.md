@@ -2,40 +2,68 @@
 
 ## 任務名
 
-Worksの可読性調整 — 縦積み・余白・文字階層を整える
+Flow・FAQ・Contactを「相談まで迷わない導線」へ整える
 
 ## GOAL
 
-現用 LazyGenius.dev のWorksセクションについて、
-すでに確立したProblem Firstの情報設計を維持したまま、
+現用 LazyGenius.dev の下半分、
 
-- Selected Worksの読み順
-- Other Worksの余白
-- Other Worksの文字サイズ
-- Selected WorksとOther Worksの視覚的な連続性
+- Flow
+- FAQ
+- Contact
 
-を整える。
+を一続きの導線として再設計する。
 
-今回の任務は **可読性と情報階層の調整** が目的。
+上半分ではすでに、
 
-新しい機能や新しい情報は追加しない。
+```text
+誰向けか
+↓
+何を任せられるか
+↓
+どんな困りごとをどう倒したか
+↓
+GitHubで証拠を見る
+```
+
+まで整理できている。
+
+今回の任務では、その続きとして、
+
+```text
+どう相談すればいい
+↓
+何が不安か
+↓
+その不安を先に解消する
+↓
+問い合わせる
+```
+
+までを自然につなげる。
 
 ---
 
 # 最重要方針
 
-現在のWorksは方向性として正しい。
+今回の目的は、
+**「問い合わせフォームを派手にすること」ではない。**
 
-今回やることは再設計ではなく、
+利用者が、
 
-**「読みにくいところだけを整える」**
+- まだ内容が固まっていない
+- 費用感が分からない
+- 小さな相談でもいいのか不安
+- 公開後も見てもらえるのか知りたい
+- どんな流れで進むのか分からない
 
-こと。
+といった不安を持ったまま離脱しないようにする。
 
-特に次の2点を優先する。
+Flow・FAQ・Contactを、
 
-1. Selected Worksの本文を素直な縦積みにできるか確認する
-2. Other Worksのpadding / font-size / 情報密度を改善する
+**発注前の不安を順番に消す場所**
+
+として扱う。
 
 ---
 
@@ -46,326 +74,311 @@ Worksの可読性調整 — 縦積み・余白・文字階層を整える
 3. `docs/LG_PROJECT_INITIAL_FLOW.md`
 4. `.codex/checklists/DONE.md`
 5. `.agents/skills/redesign-existing-projects/SKILL.md`
-6. MISSION_007 実施報告
-7. 現在のWorks画面
-8. Works関連CSS
-9. Works関連responsive CSS
-10. `template-parts/section-works.php`
+6. 現在のFlow
+7. 現在のFAQ
+8. 現在のContact
+9. Flow / FAQ / Contact関連CSS
+10. Flow / FAQ / Contact関連JavaScript
+11. ContactフォームのPHP / Ajax構造
+12. Hero / Services / Worksの現在の文言
 
-今回もUI調整のため、
+今回もUI・情報設計を含むため、
 `redesign-existing-projects` Skillを使用すること。
 
 ---
 
-# PART A — Selected Worksを縦積みで再検討する
+# PART A — Flowを「発注工程」ではなく「相談の流れ」にする
 
-## 現在の対象CSS
+## 現在の課題
 
-現在、以下のような2カラム構成が存在する。
+Flowが工程説明として長く見える場合、
+問い合わせ前の利用者には重く感じる。
 
-```css
-.works__case-content {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(16rem, 0.7fr);
-  gap: var(--space-xl);
-  padding-inline-start: calc(4rem + var(--space-l));
-}
-```
+利用者が知りたいのは、
+細かな制作工程より先に、
 
-この構成について、
-**素直な縦積みの方が読みやすいかを優先して検討する。**
+- 最初に何を伝えればいいか
+- 相談したあと何が起こるか
+- いきなり契約になるのか
+- 何を準備すればいいか
 
----
-
-## 仮説
-
-Problem Firstでは、
-
-```text
-困りごと
-↓
-こう工夫した
-↓
-こう変わる
-↓
-できたもの
-↓
-担当したこと
-↓
-使用技術
-↓
-GitHub
-```
-
-と上から下へ読む方が自然である。
-
-現在の2カラムは、
-情報を横へ分散させることで
-読み順を少し複雑にしている可能性がある。
+である。
 
 ---
 
-## 確認すること
+## 推奨構成
 
-縦積みにした場合、
+Flowはまず3段階程度の概要で読めるようにする。
 
-- ProblemからEvidenceまで自然に読めるか
-- Repositoryが本文より強くならないか
-- desktopで横に間延びしないか
-- 1440pxでも本文幅が広がりすぎないか
-- Selected Worksが縦長になりすぎないか
-- 余白でcase studyらしい呼吸を作れるか
+例：
 
-を確認する。
+### 1. まず困りごとを聞く
 
----
+完成した要件は不要。
 
-## 推奨方向
+「ここが面倒」
+「ここを直したい」
+程度から始められることを伝える。
 
-第一候補：
+### 2. 何を直すか整理する
 
-```css
-.works__case-content {
-  display: block;
-}
-```
+現状を確認し、
 
-または、
-必要なら1カラムgrid。
+- 何を変えるか
+- どこまでやるか
+- 何を触らないか
 
-```css
-.works__case-content {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-```
+を整理する。
 
-その上で、
+### 3. 作る・確認する・公開する
 
-- Approach
-- Outcome
-- Evidence
+小さく作り、
+確認しながら進める。
 
-の各ブロック間をspacingで整理する。
-
-**横並びを残す理由が弱ければ、縦積みを採用する。**
+必要な場合は公開・運用までつなげる。
 
 ---
 
-## 左インデント
+## 詳細工程
 
-現在の、
+既存の6段階などの詳細が有用なら、
+削除せず折りたたみや補足として残してよい。
 
-```css
-padding-inline-start: calc(4rem + var(--space-l));
-```
-
-も再評価する。
-
-Problem番号 `01 / 02 / 03` と本文の視覚関係を確認し、
-
-- インデントが深すぎないか
-- desktopで本文が必要以上に右へ寄っていないか
-- mobileとの切替が不自然でないか
-
-を見る。
-
-必要なら減らしてよい。
-
-ただし番号の役割は維持する。
+ただし最初から全工程を同じ強さで見せない。
 
 ---
 
-# PART B — Other Worksの可読性を上げる
+## 文体
 
-## 現在の問題
+制作会社の定型文ではなく、
+普通の言葉を使う。
 
-Other Worksは、
+避ける：
 
-- paddingが小さい
-- 文字が小さい
-- Problem / 工夫 / 証拠の密度が高い
-- Selected Worksより情報が詰まって見える
-- 下のClient Work / Supportより弱く見える
+- ヒアリング
+- 要件定義
+- 設計フェーズ
+- 実装フェーズ
+- 納品フェーズ
 
-状態になっている。
+必要なら使ってもよいが、
+先に利用者が理解できる言葉を書く。
 
----
+例：
 
-## 目標
+`何に困っているかを確認する`
+→ 補足として `要件整理`
 
-Other Worksを、
-
-**「縮小版Selected Works」**
-
-として読めるようにする。
-
-ただしSelected Worksほど大きくしない。
+の順にする。
 
 ---
 
-## 情報階層
+# PART B — FAQを「質問集」から「最後の不安潰し」へ変える
 
-強い順：
+## 目的
 
-1. Problem / Learning Theme
-2. 工夫
-3. Repository
-4. 技術
-5. GitHubリンク
+FAQは件数を増やさない。
 
-ProblemまたはLearning Themeを
-一番読みやすくする。
+Contact直前で、
+問い合わせを止めやすい質問だけを残す。
 
 ---
 
-## Font調整
-
-現在のfont-sizeを実測し、
-必要なら一段上げる。
-
-方針：
-
-- Problem / Learning Theme: 最も大きい
-- 工夫: 通常本文
-- Repository: 少し弱い
-- 技術: さらに弱い
-- GitHub: 行動として見つけやすい
-
-小さすぎる文字を使わない。
-
-特にdesktopで、
-Other Worksだけ極端に小さく見えないようにする。
-
----
-
-## Padding調整
-
-各Other Workの上下paddingを増やす。
-
-目安として、
-現在より **1.3〜1.6倍程度** を候補にする。
-
-ただし固定倍率をそのまま採用せず、
-既存space tokenで自然な値を選ぶ。
-
----
-
-## Row間の区切り
-
-新しいカード背景は増やさない。
+## 優先する質問
 
 候補：
 
-- border-bottom
+1. まだ依頼内容が固まっていなくても相談できるか
+2. 小さな修正だけでも相談できるか
+3. 費用はどう決まるか
+4. WordPress以外も相談できるか
+5. 公開後の修正や運用も相談できるか
+
+現在のFAQを確認し、
+重複や優先度の低いものは整理する。
+
+---
+
+## 回答方針
+
+一つの回答を長くしない。
+
+```text
+結論
+↓
+必要なら補足
+```
+
+の順で書く。
+
+例：
+
+`はい。内容が固まっていなくても大丈夫です。`
+
+そのあとに、
+何を確認するかを1〜2文だけ足す。
+
+---
+
+## AIっぽさを避ける
+
+避ける：
+
+- お客様のご要望に柔軟に対応します
+- 最適なご提案をいたします
+- まずはお気軽にお問い合わせください
+- 幅広いニーズに対応可能です
+
+具体的に言う。
+
+---
+
+# PART C — Contactを「フォーム」ではなく「次の一歩」にする
+
+## 目的
+
+フォームの直前で、
+
+**何を書けばいいか分からない問題**
+
+をなくす。
+
+---
+
+## Contact導入文
+
+問い合わせ前に、
+次のような内容を短く示す。
+
+候補：
+
+- まだ内容が固まっていなくてもよい
+- 困っていることだけでもよい
+- URLがあれば見せてほしい
+- 「ここが面倒」からでよい
+
+ただし、
+実際の対応方針と矛盾しない表現だけ使う。
+
+---
+
+## フォーム項目
+
+既存フォームのname / Ajax / validation /送信処理は変更しない。
+
+今回、
+フォーム項目そのものを大きく変えない。
+
+必要なら、
+
+- label
+- helper text
+- placeholder
+- section intro
+
+を調整する。
+
+---
+
+## 送信ボタン
+
+Primary CTAとして、
+Goldの役割を維持する。
+
+ラベルが抽象的なら見直してよい。
+
+候補：
+
+`相談内容を送る`
+
+既存Hero CTAと意味を合わせる。
+
+---
+
+# PART D — Flow → FAQ → Contactのつながり
+
+3セクションを独立させず、
+一つの流れとして確認する。
+
+```text
+Flow
+どう進むか分かる
+
+↓
+
+FAQ
+不安が減る
+
+↓
+
+Contact
+何を書けばいいか分かる
+```
+
+セクション間のspacingも、
+この流れが途切れないように調整する。
+
+---
+
+# PART E — 見た目の方針
+
+今回は一通り整える。
+
+**細かな美術調整は後で人間が行う前提。**
+
+したがって、
+
 - spacing
-- 細い紅赤rule
-- section divider
+- font hierarchy
+- readable width
+- section rhythm
+- border / rule
+- accordion hierarchy
+- form hierarchy
 
-など、
-最小限の区切りを使う。
+を優先する。
 
-すべての行へ太いborderや背景面を追加しない。
-
----
-
-# PART C — Other Worksのレイアウト
-
-## 現在の3列構成
-
-desktopで、
-
-```text
-Problem | 工夫 | 証拠
-```
-
-の3列になっている場合、
-読み順が分散して見える可能性がある。
+装飾の作り込みはしない。
 
 ---
 
-## 推奨検討
+## Flow
 
-2カラムへ寄せる。
+均等カードを大量に並べない。
 
-```text
-Problem + 工夫 | 証拠
-```
+候補：
 
-左側を主内容、
-右側をRepository / 技術 / GitHubの証拠欄にする。
+- 縦ステップ
+- 番号付きtimeline
+- 3段階のeditorial list
 
-比率の目安：
-
-```text
-70% | 30%
-```
-
-または、
-
-```text
-2fr | 1fr
-```
-
-ただし、
-実際の文章量を見て決める。
+Problem FirstのWorksと同じく、
+上から下へ自然に読める構成を優先する。
 
 ---
 
-## Mobile
+## FAQ
 
-mobileでは必ず縦積み。
+現在のaccordion機能は維持する。
 
-```text
-Problem
-↓
-工夫
-↓
-Repository
-↓
-技術
-↓
-GitHub
-```
+見た目は、
 
-横並びを無理に維持しない。
+- 質問
+- 開閉状態
+- 回答
+
+の階層を明確にする。
+
+accordionをカード化しすぎない。
 
 ---
 
-# PART D — Selected WorksとOther Worksの関係
+## Contact
 
-Works全体で、
-同じ思想に見えることを優先する。
+フォーム面が強すぎる場合、
+導入文とフォームの主従を確認する。
 
-```text
-Selected Works
-= 詳細なProblem First case study
-
-Other Works
-= コンパクトなProblem First issue log
-```
-
-この関係が見えるようにする。
-
----
-
-# PART E — Client Work / Supportとのバランス
-
-Client Work / Supportは今回の主対象ではない。
-
-ただし、
-Other Worksを整えた結果、
-
-- Other Worksが弱すぎないか
-- Client Work / Supportが強すぎないか
-- Works全体で視覚的な序列が自然か
-
-を確認する。
-
-Client Work / Supportの構造変更はしない。
-
-必要な場合でも、
-Works内のspacing調整に留める。
+入力欄は十分な高さ・余白を確保する。
 
 ---
 
@@ -373,69 +386,93 @@ Works内のspacing調整に留める。
 
 既存方針を維持する。
 
-## 紅赤 `#D93A49`
-
-- Problemの視線誘導
-- issue番号
-- 細いrule
-- selected state
-
-に限定する。
-
 ## Gold
 
-- GitHubリンク
+- Primary CTA
 - 行動
-- CTA
+- submit
 
-に使う。
+## 紅赤 `#D93A49`
 
-今回、色の役割は変更しない。
+- 番号
+- 小さなrule
+- 質問の注目点
+- sectionの編集的アクセント
+
+紅赤をerror色と混同しない。
+
+Contact error stateは今回変更しない。
 
 ---
 
-# PART G — 変更してよいもの
+# PART G — JavaScript / PHP境界
 
-- Works関連CSS
-- Works関連responsive CSS
-- Selected Worksのlayout
-- Other Worksのlayout
-- Other Worksのfont-size
-- Other Worksのpadding
-- Works内のspacing
-- Works内のmax-width
-- Works内のgrid構成
+## 変更禁止
+
+以下は原則変更しない。
+
+- Contact Ajax action
+- nonce
+- server validation
+- honeypot
+- rate limit
+- mail処理
+- JavaScript送信ロジック
+- FAQ accordionロジック
+- Flow accordionロジック
+- DB
+- API
+
+今回の任務は
+**情報設計・文言・UI**である。
+
+---
+
+# PART H — 変更してよいもの
+
+- Flowの文言
+- Flowの表示構造
+- Flow関連CSS
+- FAQの質問・回答文
+- FAQの表示順
+- FAQ関連CSS
+- Contactの導入文
+- Contactのlabel / helper text / placeholder
+- Contact関連CSS
+- section spacing
+- responsive CSS
+
+ただし既存input `name`、Ajax action、IDなど
+処理に使われる識別子は変更しない。
 
 ---
 
 # 変更禁止
 
-- Works文言
-- Problem / Approach / Outcomeの内容
-- Repository名
-- GitHub URL
-- Selected Works 3件の選定
-- Other Worksの分類
-- Problem / Learning Themeの区別
 - Hero
-- Services
 - About
-- Flow
-- FAQ
-- Contact
+- Services
+- Works
+- Client Work / Support
 - Header
 - Footer
-- JavaScript
+- GitHubリンク
+- PHP送信処理
+- JavaScriptロジック
 - React
+- Review Lab
 - Vite設定
 - `package.json`
 - WordPress設定
+- DB
+- URL
+- anchor ID
+- フォント
 - 新規ライブラリ
-- Gold / 紅赤tokenの意味
 
 ---
 
-# PART H — Responsive確認
+# PART I — Responsive
 
 最低限、
 
@@ -448,37 +485,50 @@ Works内のspacing調整に留める。
 
 で確認する。
 
-今回はdesktopの密度調整が重要なので、
-1024pxも追加する。
-
 ---
 
 ## 確認項目
 
-- Selected Worksが自然に上から下へ読める
-- 2カラム由来の視線分散が減っている
-- desktopで本文が横に広がりすぎない
-- Other Worksの文字が小さすぎない
-- Other Worksのpaddingが十分
-- 各作品の境界が分かる
-- Client Work / Supportとの優先度が自然
-- Repository名が主役に戻っていない
-- 技術一覧が強く見えない
-- GitHubリンクが見つけやすい
-- 横overflowが発生しない
-- Worksタブが正常に動く
+### Flow
+
+- 3段階が自然に読める
+- 番号と本文の関係が分かる
+- mobileで横並びを無理に維持しない
+- 長いカード列にならない
+
+### FAQ
+
+- 質問が読みやすい
+- tap targetが十分
+- 開閉後の回答が詰まりすぎない
+- keyboard操作が維持される
+
+### Contact
+
+- labelが読める
+- input / textareaが押しやすい
+- helper textが小さすぎない
+- submitが分かりやすい
+- 横overflowがない
 
 ---
 
-# PART I — Accessibility
+# PART J — Accessibility
 
-- heading階層を維持する
-- font-sizeを下げすぎない
-- line-heightを十分確保する
-- linkのfocus-visibleを維持する
-- 色だけで区別しない
-- 長文の1行幅を広げすぎない
-- mobileでtap targetを維持する
+既存のARIA / keyboard対応を維持する。
+
+特に、
+
+- accordion button
+- `aria-expanded`
+- focus-visible
+- form label
+- required表示
+- helper text
+- submit focus
+- error stateの既存挙動
+
+を壊さない。
 
 ---
 
@@ -491,73 +541,92 @@ npm run build
 git diff --check
 ```
 
-PHPを変更していない場合、
-PHP syntax checkは不要。
+PHPを変更した場合のみ：
+
+```bash
+php -l 対象ファイル
+```
 
 既存scriptがある場合は、
 typecheck / lint / testも実施する。
+
+FAQ accordion、
+Flowに既存interactionがある場合、
+Contactフォームの送信前UIまでをブラウザで確認する。
+
+実メール送信は行わなくてよい。
 
 ---
 
 # 報告形式
 
-## 1. Selected Works
+## 1. Flow
 
-- 2カラムを残したか
-- 縦積みにしたか
-- その理由
-- `.works__case-content` をどう変更したか
-- 左インデントをどう扱ったか
+- 変更前の問題
+- 変更後の構成
+- 3段階概要
+- 詳細をどう扱ったか
 
 ---
 
-## 2. Other Works
+## 2. FAQ
 
-- font-size
-- line-height
-- padding
+- 残した質問
+- 削った / 統合した質問
+- 回答文の変更方針
+
+---
+
+## 3. Contact
+
+- 導入文
+- label / helper text
+- submit
+- 何を書けばよいかをどう伝えたか
+
+---
+
+## 4. Flow → FAQ → Contactの導線
+
+3セクションがどうつながったか説明する。
+
+---
+
+## 5. UI判断
+
+- typography
+- spacing
 - layout
-- evidence欄
+- accordion
+- form
 
-をどう変えたか報告する。
-
----
-
-## 3. Layout判断
-
-- desktop
-- tablet
-- mobile
-
-でどう情報量を整理したか説明する。
+をどう整理したか報告する。
 
 ---
 
-## 4. Client Work / Supportとのバランス
+## 6. Taste Skillの判断
 
-Other Worksとの視覚優先度をどう確認したか報告する。
-
----
-
-## 5. Taste Skillの判断
-
-- なぜ縦積みを選んだ / 選ばなかったか
-- なぜ3列を残した / 崩したか
-- 余白と文字サイズをどう決めたか
 - generic card化をどう避けたか
-
-を報告する。
-
----
-
-## 6. Responsive確認
-
-320 / 375 / 390 / 768 / 1024 / 1440pxの結果。
+- section間のリズムをどう作ったか
+- 装飾を増やしすぎなかった理由
 
 ---
 
-## 7. 自動検証
+## 7. 変更しなかったもの
 
+PHP / Ajax / JavaScript等の境界を守ったことを明記する。
+
+---
+
+## 8. Responsive確認
+
+320 / 375 / 390 / 768 / 1024 / 1440px。
+
+---
+
+## 9. 自動検証
+
+- PHP syntax
 - typecheck
 - lint
 - test
@@ -566,9 +635,10 @@ Other Worksとの視覚優先度をどう確認したか報告する。
 
 ---
 
-## 8. 残課題
+## 10. 残課題
 
-任務外で気付いた問題は記録だけする。
+細かな見た目調整など、
+今回やらなかった内容を記録する。
 
 ---
 
@@ -576,20 +646,20 @@ Other Worksとの視覚優先度をどう確認したか報告する。
 
 以下をすべて満たしたら任務完了。
 
-- WorksのProblem First構成を維持した
-- Selected Worksの2カラムを再評価した
-- 縦積みが自然なら採用した
-- `.works__case-content` の情報順を単純化した
-- Other Worksのpaddingを改善した
-- Other Worksのfont hierarchyを改善した
-- Other WorksをSelected Worksの縮小版として読める
-- Repository名を主役に戻していない
-- 技術を補足情報のまま維持した
-- Client Work / Supportとのバランスを確認した
+- Flowを相談の流れとして整理した
+- 最初から詳細工程を全部同じ強さで見せていない
+- FAQをContact前の不安解消へ絞った
+- Contactで何を書けばいいか分かる
+- 非エンジニア向けの言葉を優先した
+- AI的な抽象表現を増やしていない
+- Flow → FAQ → Contactが一続きに見える
+- 既存accordion機能を壊していない
+- Contact Ajax / PHP処理を変更していない
+- input name / Ajax action等を変更していない
 - Gold / 紅赤の役割を維持した
 - 320 / 375 / 390 / 768 / 1024 / 1440pxで確認した
 - 横overflowが発生しない
-- Worksタブが正常に動く
+- accessibilityを維持した
 - build等の検証を通した
 - `git diff --check` を通した
 - commit / pushは明示指示があるまで行っていない
