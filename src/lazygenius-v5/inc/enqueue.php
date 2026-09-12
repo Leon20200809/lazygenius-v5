@@ -8,7 +8,7 @@
  * 目的：
  *   - テーマ共通のCSS / JS / Fontを読み込む
  *   - ページ専用CSSを必要な画面だけで読み込む
- *   - パスとバージョンを変数化して保守性を確保する
+ *   - 開発環境と公開環境でアセットの読み込み先を切り替える
  * ------------------------------------------------------------
  */
 
@@ -18,42 +18,41 @@ if (!defined('ABSPATH')) exit;
  * テーマ共通アセットを読み込む
  *
  * V5 方針：
- * - 既存CSSは assets/css/style.css をそのまま WordPress で読み込む
- * - Tailwind / JavaScript / TypeScript は Vite 経由で読み込む
+ * - CSS / JavaScript / TypeScript / React は Vite 経由で管理する
  * - 画像は assets/ 配下のまま運用する
  *
- * 開発時：
+ * local：
  * - Vite dev server から @vite/client と src/main.ts を読み込む
- * - src/main.ts から Tailwind用CSS や TS/JS モジュールを読み込む
+ * - src/main.ts から CSS / TS / React を読み込む
+ * - ViteによるHMRを利用する
  *
- * 本番時：
+ * local以外：
  * - npm run build で生成された dist/.vite/manifest.json を読む
- * - manifest.json からビルド済みCSS/JSを取得して読み込む
+ * - manifest.json からビルド済みCSS / JSを読み込む
  *
  * @return void
  */
 if (!function_exists('lg_enqueue_theme_assets')) :
     function lg_enqueue_theme_assets()
     {
-        $theme = wp_get_theme();
-        $ver   = $theme->get('Version') ?: '1.0.0';
-
         /**
          * Vite dev server のURL
          *
-         * Local by Flywheel の WordPress は http://localhost:10005/
-         * Vite は http://localhost:5173/ で動かす。
+         * Local by Flywheel でWordPressを動かし、
+         * Viteは http://localhost:5173 で起動する。
          */
-        $vite_dev_server = 'http://localhost:5173';
+        $vite_dev_server = defined('LG_VITE_DEV_SERVER')
+            ? untrailingslashit(LG_VITE_DEV_SERVER)
+            : 'http://localhost:5173';
 
         /**
-         * WordPressの環境タイプを取得 local / development のときは開発環境として扱う。
+         * WordPressの環境タイプを取得する。
          */
         $environment_type = wp_get_environment_type();
-        $is_development  = in_array($environment_type, ['local', 'development'], true);
 
         /**
-         * Google Fonts フォントはVite管理ではなく、WordPress側でそのまま読み込む。
+         * Google FontsはVite管理ではなく、
+         * WordPress側から直接読み込む。
          */
         wp_enqueue_style(
             'lg-google-fonts',
@@ -62,14 +61,8 @@ if (!function_exists('lg_enqueue_theme_assets')) :
             null
         );
 
-        /**
-         * 開発環境：Vite dev server から読み込む
-         *
-         * src/main.ts の役割：
-         * - Tailwind用CSSを import する
-         * - 今後、既存JSを移した TypeScript / JavaScript モジュールを import する
-         */
-        if ($is_development) {
+        // WordPressの環境タイプが local なら Vite dev server、それ以外は dist を読み込む。
+        if ($environment_type === 'local') {
             wp_enqueue_script_module(
                 'lg-vite-client',
                 $vite_dev_server . '/@vite/client',
@@ -85,10 +78,7 @@ if (!function_exists('lg_enqueue_theme_assets')) :
             );
         } else {
             /**
-             * 本番環境：dist/.vite/manifest.json から読み込む
-             *
-             * Viteでビルドした Tailwind CSS / JS を読み込む。
-             * 既存CSS assets/css/style.css はこの後に通常CSSとして読み込む。
+             * local以外：dist/.vite/manifest.json から読み込む。
              */
             $manifest_path = get_theme_file_path('dist/.vite/manifest.json');
 
@@ -99,11 +89,7 @@ if (!function_exists('lg_enqueue_theme_assets')) :
                     $entry = $manifest['src/main.ts'];
 
                     /**
-                     * Viteで生成されたCSSを読み込む
-                     *
-                     * 主な用途：
-                     * - Tailwind CSS
-                     * - src/main.ts から import されたCSS
+                     * Viteで生成されたCSSを読み込む。
                      */
                     if (!empty($entry['css']) && is_array($entry['css'])) {
                         foreach ($entry['css'] as $index => $css_file) {
@@ -123,10 +109,7 @@ if (!function_exists('lg_enqueue_theme_assets')) :
                     }
 
                     /**
-                     * Viteで生成されたJavaScriptを読み込む
-                     *
-                     * TypeScriptはビルド後、通常のJavaScriptとして
-                     * dist/assets/ 配下に生成される。
+                     * Viteで生成されたJavaScriptを読み込む。
                      */
                     if (!empty($entry['file'])) {
                         $js_path = get_theme_file_path('dist/' . $entry['file']);

@@ -23,8 +23,8 @@
 import "./styles/main.css";
 import "./ts/init";
 
-const review_lessons_app = document.getElementById("review-lessons-app");
-if (review_lessons_app) {
+const reviewLessonsApp = document.getElementById("review-lessons-app");
+if (reviewLessonsApp) {
   import("./react/lazygenius-review-lab/main");
 }
 
@@ -37,4 +37,3 @@ if (review_lessons_app) {
  *
  * 確認後、不要なら削除してOK。
  */
-console.log("LazyGenius V5: Vite main.ts loaded.");

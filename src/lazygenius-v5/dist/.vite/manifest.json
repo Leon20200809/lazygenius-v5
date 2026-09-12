@@ -1,6 +1,6 @@
 {
   "src/main.ts": {
-    "file": "assets/main-BXGB7JEm.js",
+    "file": "assets/main-pZSnXsZQ.js",
     "name": "main",
     "src": "src/main.ts",
     "isEntry": true,
@@ -8,13 +8,13 @@
       "src/react/lazygenius-review-lab/main.tsx"
     ],
     "css": [
-      "assets/main-xumkSiVL.css"
+      "assets/main-Bu_czSdc.css"
     ]
   },
   "src/react/lazygenius-review-lab/main.tsx": {
-    "file": "assets/reviewLab-P2h06qna.js",
-    "name": "reviewLab",
+    "file": "assets/main-CSI_WHHx.js",
+    "name": "main",
     "src": "src/react/lazygenius-review-lab/main.tsx",
-    "isEntry": true
+    "isDynamicEntry": true
   }
 }

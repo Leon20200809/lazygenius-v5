@@ -1,7 +1,14 @@
 /*
 Theme Name: LazyGenius.dev V5
+Theme URI: https://lazygenius.dev/
 Author: Leon.C
 Author URI: https://lazygenius.dev/
 Description: 通常のWordPressクラシックテーマとして納品できる構成を保ちながら、Vite / Tailwind / TypeScript によってCSS・JavaScriptを管理し、必要に応じてReactを部分導入できる拡張性を備えたテーマ。
 Version: 5.0.0
+Requires at least: 6.6
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: lg-theme
+Tags: custom-logo, custom-menu, featured-images, translation-ready, blog
 */

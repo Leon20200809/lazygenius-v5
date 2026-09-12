@@ -124,10 +124,7 @@ export default defineConfig({
        * src/main.ts から CSS や各種 TypeScript モジュールを読み込む。
        * WordPress側も開発時にはこのファイルを読み込む。
        */
-      input: {
-        main: "src/main.ts",
-        reviewLab: "src/react/lazygenius-review-lab/main.tsx"
-      }
+      input: "src/main.ts"
     }
   }
 });

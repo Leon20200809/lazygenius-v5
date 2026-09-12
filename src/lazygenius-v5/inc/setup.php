@@ -25,9 +25,20 @@ if (! function_exists('lg_theme_setup')) :
         // --- 投稿のアイキャッチ画像を有効化
         add_theme_support('post-thumbnails');
 
+        add_theme_support('html5', [
+            'search-form', 'comment-form', 'comment-list', 'gallery',
+            'caption', 'style', 'script',
+        ]);
+        add_theme_support('responsive-embeds');
+        add_theme_support('align-wide');
+        add_theme_support('custom-logo', [
+            'height' => 120, 'width' => 480,
+            'flex-height' => true, 'flex-width' => true,
+        ]);
+
         // --- ブロックエディタ用のスタイルを適用
         add_theme_support('editor-styles');
-        add_editor_style('assets/css/editor.css');
+        add_editor_style('style.css');
 
         // --- ナビゲーションメニュー登録
         register_nav_menus([
@@ -53,5 +64,4 @@ function lg_get_nav_href($section_id = '')
 
     return $section_id === '' ? home_url('/') : home_url('/#' . $section_id);
 }
-
 

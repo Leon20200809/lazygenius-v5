@@ -18,11 +18,13 @@
     <header class="site-header">
         <div class="site-header__inner lg-container">
 
-            <a class="site-header__logo" href="<?= esc_url(home_url('/')); ?>" aria-label="<?php bloginfo('name'); ?> ホームへ">
-                <img
-                    src="<?= esc_url(lg_get_img_uri("/sitelogo-black.webp")); ?>"
-                    alt="<?= esc_attr(get_bloginfo('name')); ?>">
-            </a>
+            <?php if (has_custom_logo()) : ?>
+                <div class="site-header__logo"><?php the_custom_logo(); ?></div>
+            <?php else : ?>
+                <a class="site-header__logo" href="<?= esc_url(home_url('/')); ?>" aria-label="<?= esc_attr(get_bloginfo('name')); ?> ホームへ">
+                    <img src="<?= esc_url(lg_get_img_uri('/sitelogo-black.webp')); ?>" alt="<?= esc_attr(get_bloginfo('name')); ?>">
+                </a>
+            <?php endif; ?>
 
             <button
                 class="lg-nav-toggle"
