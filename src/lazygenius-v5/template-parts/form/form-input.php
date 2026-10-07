@@ -39,7 +39,7 @@
 
         <div class="contact-row">
             <label class="contact-row__label" for="contact-message">困っていること・相談したいこと</label>
-            <p class="contact-row__help" id="contact-message-help">対象のURL、直したい場所、今困っていることなど、分かる範囲で構いません。</p>
+            <p class="contact-row__help" id="contact-message-help">対象のURL、直したい場所、今困っていることなど、分かる範囲で400文字以内でお書きください。</p>
             <textarea
                 class="contact-row__control"
                 id="contact-message"

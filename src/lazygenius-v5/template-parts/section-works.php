@@ -5,42 +5,42 @@ $git_hub_url = 'https://github.com/Leon20200809';
 $selected_works = [
     [
         'number' => '01',
-        'title' => 'LazyGeniusDev WordPress Theme V4',
-        'problem' => 'サイトを直すたびに、公開までの手順が増えていく。',
-        'approach' => '画面、問い合わせ、記事管理を一つのテーマへまとめました。修正から公開までを、同じ流れで扱えるようにしています。',
-        'product' => '画面、問い合わせ、記事管理、公開方法をまとめたWordPressテーマ。',
-        'change' => '記事は管理画面から追加できます。サイトの修正はGitHubへ反映するとサーバーへ届けられるため、制作後の更新や公開までまとめて扱えます。',
-        'scope' => '画面設計 / WordPressテーマ / 問い合わせ / 管理画面 / 公開方法',
-        'tech' => 'WordPress / PHP / JavaScript / GitHub Actions',
-        'service' => 'Webサイトを作る・直す / 公開まで',
-        'status' => 'GitHub / 公開運用',
-        'url' => $git_hub_url . '/LazyGeniusDev_WordPressThemeV4',
+        'title' => '中古車販売イベントの案内ページ',
+        'problem' => '開催情報や参加店舗をまとめ、気になる車の確認・問い合わせへつなげたい。',
+        'approach' => '開催情報と参加店舗をWordPressのページにまとめ、店舗ごとの電話・在庫情報へのリンクを用意しました。',
+        'product' => '中古車販売イベントの案内ページ。',
+        'change' => '来場を検討する人が、開催情報と参加店舗を一か所で確認できます。店舗情報はデータをもとに一覧へ表示する構成にしています。',
+        'scope' => 'WordPress実装 / 店舗一覧のデータ表示 / 電話・在庫情報への導線',
+        'tech' => 'WordPress / PHP / JavaScript',
+        'service' => 'Webサイトを作る・直す',
+        'status' => '顧客案件 / 顧客名非公開',
+        'url' => '',
     ],
     [
         'number' => '02',
-        'title' => 'LG Mercari Duplicate Checker',
-        'problem' => '商品を調べるたびに、スプレッドシートを開くのが面倒。',
-        'approach' => '検索画面の商品と登録済みの一覧を自動で照らし合わせ、その場で重複が分かるようにしました。',
-        'product' => '検索画面で登録済み商品を示すChrome拡張。',
-        'change' => 'スプレッドシートを別画面で探さなくても、検索結果を見たまま重複を判断できます。あとから表示された商品も確認の対象になります。',
-        'scope' => '拡張機能 / 商品情報の読み取り / スプレッドシート連携 / 重複表示',
-        'tech' => 'Chrome Extension / JavaScript / Google Sheets API',
-        'service' => '手作業を仕組みに変える',
-        'status' => 'GitHub / MVP',
-        'url' => $git_hub_url . '/lg-mercari-duplicate-checker',
+        'title' => 'LG Job Hunter',
+        'problem' => '求人を一件ずつ探し、会社名や条件を転記する手間を減らしたい。',
+        'approach' => '保存した検索条件でハローワークの求人情報を取り込み、重複を確認してWordPressに保存するツールを作りました。',
+        'product' => '求人の取得・重複確認・一覧管理をまとめた自主開発ツール。',
+        'change' => '会社名・勤務地・給与・応募状況を管理画面の一覧で確認できます。求人ページとメモを行き来して、同じ情報を転記する手間を減らすための仕組みです。',
+        'scope' => '検索条件の保存 / 求人情報の取り込み / 重複確認 / 一覧・応募状況の管理',
+        'tech' => 'WordPress / PHP / Custom Post Type / Meta Box / HTML Parser',
+        'service' => '探す・転記する手間を減らす',
+        'status' => '自主開発 / GitHub',
+        'url' => $git_hub_url . '/lg-job-hunter',
     ],
     [
         'number' => '03',
-        'title' => 'Astro × Cloudflare LP',
-        'problem' => '軽いLPにしたい。でも問い合わせ処理は、ページと分けて扱いたい。',
-        'approach' => '案内ページは小さく作り、入力確認とメール送信だけを別の処理へ分けました。',
-        'product' => 'サービス案内LPと、問い合わせをメールへ届ける仕組み。',
-        'change' => '表示するページは小さく保ち、問い合わせだけを別の処理として動かします。入力内容と自動送信を確認してからメールへ進む流れも用意しています。',
-        'scope' => '画面 / 問い合わせ / 入力確認 / メール送信 / 公開方法',
-        'tech' => 'Astro / TypeScript / Cloudflare Workers / Turnstile / Resend',
-        'service' => 'Webサイトを作る・直す / 公開まで',
-        'status' => 'GitHub / Learning Lab',
-        'url' => $git_hub_url . '/lg-astro-cloudflare-lp',
+        'title' => 'Next.js レジュメ管理アプリ',
+        'problem' => '経歴を直すたびに、Web表示と印刷用書類を別々に更新したくない。',
+        'approach' => 'プロフィール・学歴・職歴・資格をスプレッドシートで管理し、同じデータをWeb表示と印刷用書類へ差し込む形にしました。',
+        'product' => 'スプレッドシートの情報をWeb・印刷で共有する自主開発アプリ。',
+        'change' => '元の情報はスプレッドシートで更新できます。次にサーバーで画面を生成するときに読み込み、Web表示と印刷用書類を別々に直す手間を減らします。',
+        'scope' => 'スプレッドシート連携 / プロフィール・経歴の表示 / 印刷用書類',
+        'tech' => 'Next.js / React / TypeScript / Tailwind CSS / Google Sheets / Vercel',
+        'service' => '複数の場所を更新する手間を減らす',
+        'status' => '自主開発 / GitHub',
+        'url' => $git_hub_url . '/lazygenius-web-resume',
     ],
 ];
 
@@ -58,6 +58,36 @@ $works_tabs = [
 
 $works_items = [
     [
+        'title' => 'LazyGeniusDev WordPress Theme V4',
+        'problem' => 'サイトを直すたびに、公開までの手順が増えていく。',
+        'approach' => '画面、問い合わせ、記事管理を一つのテーマへまとめました。修正から公開までを、同じ流れで扱えるようにしています。',
+        'link_label' => 'GitHubで実装を見る',
+        'tech' => 'WordPress / PHP / JavaScript / GitHub Actions',
+        'image' => 'works-sample.webp',
+        'category' => 'wordpress',
+        'url' => $git_hub_url . '/LazyGeniusDev_WordPressThemeV4',
+    ],
+    [
+        'title' => 'LG Mercari Duplicate Checker',
+        'problem' => '商品を調べるたびに、スプレッドシートを開くのが面倒。',
+        'approach' => '検索画面の商品と登録済みの一覧を自動で照らし合わせ、その場で重複が分かるようにしました。',
+        'link_label' => 'GitHubで実装を見る',
+        'tech' => 'Chrome Extension / JavaScript / Google Sheets API',
+        'image' => 'works-sample.webp',
+        'category' => 'react',
+        'url' => $git_hub_url . '/lg-mercari-duplicate-checker',
+    ],
+    [
+        'title' => 'Astro × Cloudflare LP',
+        'problem' => '軽いLPにしたい。でも問い合わせ処理は、ページと分けて扱いたい。',
+        'approach' => '案内ページは小さく作り、入力確認とメール送信だけを別の処理へ分けました。',
+        'link_label' => 'GitHubで実装を見る',
+        'tech' => 'Astro / TypeScript / Cloudflare Workers / Turnstile / Resend',
+        'image' => 'works-sample.webp',
+        'category' => 'wordpress',
+        'url' => $git_hub_url . '/lg-astro-cloudflare-lp',
+    ],
+    [
         'title' => 'LazyGenius V5 WordPress Theme',
         'problem' => 'WordPressテーマはそのまま納品したい。でもCSSやJavaScriptはまとめて管理したい。',
         'approach' => 'WordPressの仕組みを残し、開発用のファイルだけをビルドする形に分けた。',
@@ -66,16 +96,6 @@ $works_items = [
         'image' => 'works-sample.webp',
         'category' => 'wordpress',
         'url' => $git_hub_url . "/lazygenius-v5",
-    ],
-    [
-        'title' => 'LG Job Hunter',
-        'problem' => '求人ページを一件ずつ開き、候補を手で残していくのが面倒。',
-        'approach' => '求人の取得、重複確認、保存、管理画面での確認までをWordPressへまとめた。',
-        'link_label' => 'GitHubで実装を見る',
-        'tech' => 'WordPress / PHP / Custom Post Type / Meta Box / HTML Parser / Cron設計',
-        'image' => 'works-sample.webp',
-        'category' => 'wordpress',
-        'url' => $git_hub_url . "/lg-job-hunter",
     ],
     [
         'title' => 'WordPress × Next.js ヘッドレスCMS表示デモ',
@@ -106,16 +126,6 @@ $works_items = [
         'image' => 'works-sample.webp',
         'category' => 'laravel',
         'url' => $git_hub_url . "/laravel-test-dojo",
-    ],
-    [
-        'title' => 'Next.js レジュメ管理アプリ',
-        'problem' => '経歴を直すたびに、Web表示と印刷用書類を別々に更新したくない。',
-        'approach' => '経歴はスプレッドシートで管理し、Web表示、印刷、選考結果の返信へ使い回せるようにした。',
-        'link_label' => 'GitHubで実装を見る',
-        'tech' => 'Next.js / React / TypeScript / Tailwind CSS / Google Sheets / Vercel',
-        'image' => 'works-sample.webp',
-        'category' => 'react',
-        'url' => $git_hub_url . "/lazygenius-web-resume",
     ],
     [
         'title' => 'LG UI KIT',
@@ -157,7 +167,7 @@ $works_items = [
             <h2 class="section-title works__title">Works</h2>
             <p class="works__lead">
                 困りごとに対して何を作り、作業がどう変わるのかをまとめています。
-                詳しい実装は、それぞれのGitHubから確認できます。
+                顧客案件と自主開発を区別し、公開できる実装にはGitHubへのリンクを添えています。
             </p>
         </div>
 
@@ -202,14 +212,17 @@ $works_items = [
                                 </div>
                             </dl>
 
-                            <a
-                                class="works__evidence-link"
-                                href="<?= esc_url($selected_work['url']); ?>"
-                                aria-label="<?= esc_attr($selected_work['title'] . 'の実コードをGitHubで確認'); ?>"
-                                target="_blank"
-                                rel="noopener noreferrer">
-                                GitHubで実装を見る
-                            </a>
+                            <?php // 公開先のある実績だけに実装リンクを表示する。 ?>
+                            <?php if ($selected_work['url'] !== '') : ?>
+                                <a
+                                    class="works__evidence-link"
+                                    href="<?= esc_url($selected_work['url']); ?>"
+                                    aria-label="<?= esc_attr($selected_work['title'] . 'の実コードをGitHubで確認'); ?>"
+                                    target="_blank"
+                                    rel="noopener noreferrer">
+                                    GitHubで実装を見る
+                                </a>
+                            <?php endif; ?>
                         </aside>
                     </div>
                 </article>
